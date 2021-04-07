@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment(), View.OnClickListener {
     lateinit var navController: NavController
+    lateinit var handler: DatabaseHelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,10 +39,35 @@ class LoginFragment : Fragment(), View.OnClickListener {
             R.id.next_btn -> {
                 if (!TextUtils.isEmpty(input_username.text.toString())) {
                     val bundle = bundleOf("recipient" to input_username.text.toString())
-                    navController.navigate(
-                        R.id.action_LoginFragment_to_BookStoreFragment,
-                        bundle
+                    handler = DatabaseHelper(activity!!)
+                    handler.insertUserData("Prince Velasco",
+                        "princevelasco16@gmail.com",
+                        "PrynsTag",
+                        "123")
+                    handler.insertUserData("Kath Marinas",
+                        "kathorsii@gmail.com",
+                        "kathorsii",
+                        "123")
+                    handler.insertUserData("JC Garon",
+                        "garon@gmail.com",
+                        "garon",
+                        "123"
                     )
+                    handler.insertUserData("Tricia Relox",
+                        "3cia@gmail.com",
+                        "3cia",
+                        "123"
+                    )
+                    if (handler.isUserExists(input_username.text.toString(),
+                            input_password.text.toString())
+                    ) {
+                        Toast.makeText(activity!!, "Successfully Login", Toast.LENGTH_SHORT).show()
+                        navController.navigate(R.id.action_LoginFragment_to_BookStoreFragment,
+                            bundle)
+                    } else {
+                        Toast.makeText(activity!!, "Login Failed", Toast.LENGTH_SHORT).show()
+                    }
+
                 } else {
                     Toast.makeText(activity, "Enter a name", Toast.LENGTH_SHORT).show()
                 }
