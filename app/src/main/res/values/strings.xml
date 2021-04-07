@@ -7,4 +7,12 @@
     <string name="image_illustration">Resume Image Illustration</string>
     <string name="get_started">Get Started</string>
     <string name="glad_to_see_you">Glad to See You</string>
+    <string name="username">Username</string>
+    <string name="sent_money_msg">$1 was sent to ALPHA</string>
+    <string name="password">Password</string>
+    <string name="next">next</string>
+    <string name="cancel">Cancel</string>
+    <string name="sub_desc">Lorem ipsum sit dolor amet</string>
+    <string name="desc">Lorem Ipsum</string>
+    <string name="mainFragment_illustration">Onboard Image Illustration</string>
 </resources>
