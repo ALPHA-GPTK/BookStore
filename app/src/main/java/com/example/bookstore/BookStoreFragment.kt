@@ -23,6 +23,7 @@ class BookStoreFragment : Fragment(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         recipient = arguments!!.getString("recipient").toString()
 
 
