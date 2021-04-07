@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_graph"
+            app:startDestination="@id/mainFragment">
+
+    <!-- MainFragment -->
+    <fragment android:id="@+id/mainFragment"
+              android:name="com.example.bookstore.MainFragment"
+              android:label="fragment_main"
+              tools:layout="@layout/fragment_main">
+        <action android:id="@+id/action_mainFragment_to_LoginFragment"
+                app:destination="@id/LoginFragment"
+        />
+
+    </fragment>
+
+
+    <!-- ViewTransactionFragment -->
+
+
+    <!-- LoginFragment -->
+    <fragment android:id="@+id/LoginFragment"
+              android:name="com.example.bookstore.LoginFragment"
+              android:label="fragment_login"
+              tools:layout="@layout/fragment_login">
+
+        <action android:id="@+id/action_LoginFragment_to_BookStoreFragment"
+                app:destination="@id/BookStoreFragment"
+                app:popEnterAnim="@anim/slide_in_left"
+        />
+    </fragment>
+
+
+
+    <!-- ViewBalanceFragment -->
+
+
+    <!-- BookStoreFragment -->
+    <fragment android:id="@+id/BookStoreFragment"
+              android:name="com.example.bookstore.BookStoreFragment"
+              android:label="fragment_specify_amount"
+              tools:layout="@layout/fragment_book_store">
+
+        <argument android:name="recipient"
+                  android:defaultValue="None"/>
+
+        <action android:id="@+id/action_BookStoreFragment_to_CartFragment"
+                app:destination="@id/CartFragment"
+        />
+    </fragment>
+
+
+
+    <!-- CartFragment -->
+    <fragment android:id="@+id/CartFragment"
+              android:name="com.example.bookstore.CartFragment"
+              android:label="fragment_cart"
+              tools:layout="@layout/fragment_cart">
+
+        <argument android:name="recipient"
+                  android:defaultValue="None"/>
+
+        <argument android:name="amount"
+                  app:argType="com.example.bookstore.Money"/>
+
+    </fragment>
+
+
+
+</navigation>
