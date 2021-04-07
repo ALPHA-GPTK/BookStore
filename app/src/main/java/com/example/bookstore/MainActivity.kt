@@ -3,7 +3,6 @@ package com.example.bookstore
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_book_store.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,11 +25,9 @@ class MainActivity : AppCompatActivity() {
 
     //For navigating fragments -----
     private fun replaceFragment(fragment: Fragment) {
-        if(fragment !=null){
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, fragment)
-            transaction.commit()
-        }
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
     }
 }
 
