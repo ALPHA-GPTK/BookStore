@@ -34,6 +34,4 @@ class MainFragment : Fragment(), View.OnClickListener {
         }
     }
 
-
-
 }

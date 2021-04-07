@@ -61,10 +61,6 @@
 
         <argument android:name="recipient"
                   android:defaultValue="None"/>
-
-        <argument android:name="amount"
-                  app:argType="com.example.bookstore.Money"/>
-
     </fragment>
 
 
