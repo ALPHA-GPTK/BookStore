@@ -2,7 +2,6 @@ package com.example.bookstore
 
 import android.os.Bundle
 import android.text.TextUtils
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +9,10 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.fragment_book_store.*
-import java.math.BigDecimal
 
 
 class BookStoreFragment : Fragment(), View.OnClickListener {
@@ -23,10 +22,7 @@ class BookStoreFragment : Fragment(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         recipient = arguments!!.getString("recipient").toString()
-
-
     }
 
     override fun onCreateView(
@@ -46,11 +42,9 @@ class BookStoreFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        when(v!!.id){
+        when (v!!.id) {
             R.id.send_btn -> {
-                if(!TextUtils.isEmpty(input_amount.text.toString())){
-
-//                    val amount = Money(BigDecimal(input_amount.text.toString()))
+                if (!TextUtils.isEmpty(input_amount.text.toString())) {
                     val amount = input_amount.text.toString()
                     val bundle = bundleOf(
                         "recipient" to recipient,
@@ -60,12 +54,10 @@ class BookStoreFragment : Fragment(), View.OnClickListener {
                         R.id.action_BookStoreFragment_to_CartFragment,
                         bundle
                     )
-                }
-                else{
+                } else {
                     Toast.makeText(activity, "Enter an amount", Toast.LENGTH_SHORT).show()
                 }
             }
-
             R.id.cancel_btn -> activity!!.onBackPressed()
         }
     }
