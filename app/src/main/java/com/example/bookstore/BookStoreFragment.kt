@@ -15,59 +15,64 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_book_store.*
+import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
+import androidx.appcompat.app.AppCompatActivity
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 
-
-class BookStoreFragment : Fragment(), View.OnClickListener, RecyclerView.Adapter() {
+class BookStoreFragment : AppCompatActivity() {
 
     lateinit var navController: NavController
     lateinit var recipient: String
 
-    class ExampleViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val imageview: ImageView = itemView.
+    class ExampleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {   //Example sa youtube
+//        val imageview: ImageView = itemView.
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        recipient = arguments!!.getString("recipient").toString()
 
-    }
+        //  API Code
+        val title = mutableListOf<String>() //  API Book Title
+        val author = mutableListOf<String>() //  API Book Author
+        val numpages = mutableListOf<String>() //  API Number of Pages
 
-    public onCreateViewHolder()
+        val textView = findViewById<TextView>(R.id.error_code)
 
-    override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_book_store, container, false)
-    }
+// ...
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-//        navController = Navigation.findNavController(view)
-//        view.findViewById<Button>(R.id.send_btn).setOnClickListener(this)
-//        view.findViewById<Button>(R.id.cancel_btn).setOnClickListener(this)
-//        val message = "Sending money to $recipient"
-//        view.findViewById<TextView>(R.id.recipient).text = message
-    }
+// Instantiate the RequestQueue.
+        val queue = Volley.newRequestQueue(this)
+        val url = "https://jsonformatter.org/json-viewer/999f29"
 
-    override fun onClick(v: View?) {
-//        when (v!!.id) {
-//            R.id.send_btn -> {
-//                if (!TextUtils.isEmpty(input_amount.text.toString())) {
-//                    val amount = input_amount.text.toString()
-//                    val bundle = bundleOf(
-//                        "recipient" to recipient,
-//                        "amount" to amount
-//                    )
-//                    navController.navigate(
-//                        R.id.action_BookStoreFragment_to_CartFragment,
-//                        bundle
-//                    )
-//                } else {
-//                    Toast.makeText(activity, "Enter an amount", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//            R.id.cancel_btn -> activity!!.onBackPressed()
-//        }
+// Request a string response from the provided URL.
+        val stringRequest = StringRequest(Request.Method.GET, url,
+                Response.Listener<String> { response ->
+                    // Display the first 500 characters of the response string.
+//                textView.text = response.toString()
+
+                    try {
+                        val json_obj: JSONObject = JSONObject(response.toString())
+                        var arr_items: JSONArray = json_obj.getJSONArray("book")
+                        for (i in 0..arr_items.length() - 1) {
+                            var item: JSONObject = arr_items.getJSONObject(i)
+                            var item_title = item.getString("title")
+                            title.add(item_title)   // Add item to mutablelist title
+                            // wala pa book author and pages
+                        }
+
+//                    textView.text = response.toString()
+                        textView.text = title.toString()
+
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+                },
+                Response.ErrorListener { textView.text = "That didn't work!" })
+
     }
 }
