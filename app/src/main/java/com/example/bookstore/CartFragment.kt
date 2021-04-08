@@ -10,15 +10,15 @@ import android.widget.TextView
 
 class CartFragment : Fragment() {
 
-    lateinit var recipient: String
-    lateinit var money: String
+//    lateinit var recipient: String
+//    lateinit var money: String
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        recipient = arguments!!.getString("recipient").toString()
-        money = arguments!!.getString("amount")!!
-
-    }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        recipient = arguments!!.getString("recipient").toString()
+//        money = arguments!!.getString("amount")!!
+//
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,8 +30,8 @@ class CartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val amount = money!!
-        val confirmationMessage = "You have sent $$amount to $recipient"
-        view.findViewById<TextView>(R.id.confirmation_message).text = confirmationMessage
+//        val amount = money!!
+//        val confirmationMessage = "You have sent $$amount to $recipient"
+//        view.findViewById<TextView>(R.id.confirmation_message).text = confirmationMessage
     }
 }
