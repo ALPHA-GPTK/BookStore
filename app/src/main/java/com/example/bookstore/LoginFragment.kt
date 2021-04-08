@@ -1,6 +1,7 @@
 package com.example.bookstore
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -38,27 +39,28 @@ class LoginFragment : Fragment(), View.OnClickListener {
         when (v!!.id) {
             R.id.next_btn -> {
                 if (!TextUtils.isEmpty(input_username.text.toString())) {
-                    val bundle = bundleOf("recipient" to input_username.text.toString())
+                    val bundle = bundleOf("username" to input_username.text.toString(), "password" to input_password.text.toString())
                     handler = DatabaseHelper(activity!!)
                     // Static Login
-                    handler.insertUserData("Prince Velasco",
-                        "princevelasco16@gmail.com",
-                        "PrynsTag",
-                        "123")
-                    handler.insertUserData("Kath Marinas",
-                        "kathorsii@gmail.com",
-                        "kathorsii",
-                        "123")
-                    handler.insertUserData("JC Garon",
-                        "garon@gmail.com",
-                        "garon",
-                        "123"
-                    )
-                    handler.insertUserData("Tricia Relox",
-                        "3cia@gmail.com",
-                        "3cia",
-                        "123"
-                    )
+//                    handler.insertUserData("Prince Velasco",
+//                        "princevelasco16@gmail.com",
+//                        "PrynsTag",
+//                        "123")
+//                    handler.insertUserData("Kath Marinas",
+//                        "kathorsii@gmail.com",
+//                        "kathorsii",
+//                        "123")
+//                    handler.insertUserData("JC Garon",
+//                        "garon@gmail.com",
+//                        "garon",
+//                        "123"
+//                    )
+//                    handler.insertUserData("Tricia Relox",
+//                        "3cia@gmail.com",
+//                        "3cia",
+//                        "123"
+//                    )
+//                    handler.insertBookData("Prince the Great", "Prince Velasco", "123", "prince", "toot")
                     if (handler.isExists("user", input_username.text.toString(),
                             input_password.text.toString())
                     ) {
