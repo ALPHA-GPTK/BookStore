@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.activity_a_pi.*
-import kotlinx.android.synthetic.main.fragment_book_store.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -35,7 +33,7 @@ class APiActivity : AppCompatActivity() {
         val author = mutableListOf<String>() //  API Book Author
         val numpages = mutableListOf<String>() //  API Number of Pages
 
-        val textView_Result = findViewById<TextView>(R.id.txv_result)
+        val textView_Result = findViewById<TextView>(R.id.txv_booktitle)
 
 // ...
 
@@ -69,7 +67,7 @@ class APiActivity : AppCompatActivity() {
                     e.printStackTrace()
                 }
             },
-            { txv_result.text = "That didn't work!" })
+            { textView_Result.text = "That didn't work!" })
         // Add the request to the RequestQueue.
         queue.add(stringRequest)
     }
