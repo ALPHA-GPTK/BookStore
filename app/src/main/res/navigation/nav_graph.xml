@@ -30,6 +30,9 @@
                 app:destination="@id/BookStoreFragment"
                 app:popEnterAnim="@anim/slide_in_left"
         />
+        <action
+            android:id="@+id/action_LoginFragment_to_APiFragment"
+            app:destination="@id/APiFragment" />
     </fragment>
 
 
@@ -62,7 +65,15 @@
         <argument android:name="recipient"
                   android:defaultValue="None"/>
     </fragment>
-
+    <fragment
+        android:id="@+id/APiFragment"
+        android:name="com.example.bookstore.APiFragment"
+        android:label="fragment_a_pi"
+        tools:layout="@layout/fragment_a_pi" >
+        <action
+            android:id="@+id/action_APiFragment_to_CartFragment"
+            app:destination="@id/CartFragment" />
+    </fragment>
 
 
 </navigation>
