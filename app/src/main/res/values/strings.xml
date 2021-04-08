@@ -20,4 +20,5 @@
     <string name="card_author">Author</string>
     <string name="amount">Amount</string>
     <string name="send">send</string>
+    <string name="book_title">Book Title</string>
 </resources>
