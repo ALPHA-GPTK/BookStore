@@ -1,10 +1,12 @@
 package com.example.bookstore
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -36,10 +38,12 @@ class APiFragment : Fragment(), View.OnClickListener {
         val title = mutableListOf<String>()
         var author = JSONArray()
         val numPages = mutableListOf<String>()
+        var image: Drawable?
 
         val tvBookTitle = view.findViewById<TextView>(R.id.txv_booktitle)
         val tvAuthor = view.findViewById<TextView>(R.id.txv_author)
         val tvNumPage = view.findViewById<TextView>(R.id.txv_numpages)
+        var ivBookImg = view.findViewById<ImageView>(R.id.ivw_book)
 
         // Instantiate the RequestQueue.
         val queue = Volley.newRequestQueue(activity!!)
@@ -57,11 +61,14 @@ class APiFragment : Fragment(), View.OnClickListener {
                         title.add(item.getString("title"))
                         author = item.getJSONArray("authors")
                         numPages.add(item.getString("pageCount"))
+//                        image = Drawable.createFromPath(item.getString("ivBookImg"))
                     }
 
                     tvBookTitle.text = title[0]
                     tvAuthor.text = author[0].toString()
                     tvNumPage.text = numPages[0]
+                    val img = Drawable.createFromPath("https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/ableson2.jpg")
+                    ivBookImg.setImageDrawable(img)
 
                 } catch (e: JSONException) {
                     e.printStackTrace()
