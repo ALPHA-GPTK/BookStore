@@ -4,6 +4,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+        "https://dl.google.com/dl/android/maven2/"
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.3"
