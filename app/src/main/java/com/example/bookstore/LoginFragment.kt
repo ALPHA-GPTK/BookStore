@@ -40,6 +40,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
                 if (!TextUtils.isEmpty(input_username.text.toString())) {
                     val bundle = bundleOf("recipient" to input_username.text.toString())
                     handler = DatabaseHelper(activity!!)
+                    // Static Login
                     handler.insertUserData("Prince Velasco",
                         "princevelasco16@gmail.com",
                         "PrynsTag",
@@ -58,12 +59,11 @@ class LoginFragment : Fragment(), View.OnClickListener {
                         "3cia",
                         "123"
                     )
-                    if (handler.isUserExists(input_username.text.toString(),
+                    if (handler.isExists("user", input_username.text.toString(),
                             input_password.text.toString())
                     ) {
                         Toast.makeText(activity!!, "Successfully Login", Toast.LENGTH_SHORT).show()
-                        navController.navigate(R.id.action_LoginFragment_to_BookStoreFragment,
-                            bundle)
+                        navController.navigate(R.id.action_LoginFragment_to_BookStoreFragment, bundle)
                     } else {
                         Toast.makeText(activity!!, "Login Failed", Toast.LENGTH_SHORT).show()
                     }
