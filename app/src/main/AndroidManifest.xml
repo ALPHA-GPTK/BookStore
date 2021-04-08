@@ -21,18 +21,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".BookStoreFragment"
             tools:ignore="Instantiatable" />
 
-            <!-- Uncomment this to work only in APiActivity -->
-<!--        <activity android:name=".APiActivity">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
+        <activity
+            android:name=".APiFragment"
+            tools:ignore="Instantiatable" />
     </application>
 
 </manifest>
