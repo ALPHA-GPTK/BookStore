@@ -45,7 +45,7 @@ class APiActivity : AppCompatActivity() {
         val stringRequest = StringRequest(Request.Method.GET, url,
             { response ->
                 textView_Result.text = response.toString()
-                Log.i("test", "test")
+
                 try {
                     val json_obj: JSONObject = JSONObject(response.toString())
                     val arr_items: JSONArray = json_obj.getJSONArray("book")
