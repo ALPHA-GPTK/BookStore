@@ -21,4 +21,8 @@
     <string name="amount">Amount</string>
     <string name="send">send</string>
     <string name="book_title">Book Title</string>
+    <string name="cart_icon">Shop cart icon</string>
+    <string name="total_price">Total Price</string>
+    <string name="logout">logout</string>
+    <string name="add">add</string>
 </resources>
