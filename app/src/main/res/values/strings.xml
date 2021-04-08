@@ -18,4 +18,6 @@
     <string name="cart">Cart</string>
     <string name="account">Account</string>
     <string name="card_author">Author</string>
+    <string name="amount">Amount</string>
+    <string name="send">send</string>
 </resources>
