@@ -29,7 +29,8 @@ class BookStoreFragment : AppCompatActivity() {
     lateinit var navController: NavController
     lateinit var recipient: String
 
-    class ExampleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {   //Example sa youtube
+    class ExampleViewHolder(itemView: View) :
+        RecyclerView.ViewHolder(itemView) {   //Example sa youtube
 //        val imageview: ImageView = itemView.
     }
 
@@ -47,32 +48,31 @@ class BookStoreFragment : AppCompatActivity() {
 
 // Instantiate the RequestQueue.
         val queue = Volley.newRequestQueue(this)
-        val url = "https://jsonformatter.org/json-viewer/999f29"
+        val url = "https:/10.0.2.2/FinalProject/"
 
 // Request a string response from the provided URL.
         val stringRequest = StringRequest(Request.Method.GET, url,
-                Response.Listener<String> { response ->
-                    // Display the first 500 characters of the response string.
+            { response ->
 //                textView.text = response.toString()
 
-                    try {
-                        val json_obj: JSONObject = JSONObject(response.toString())
-                        var arr_items: JSONArray = json_obj.getJSONArray("book")
-                        for (i in 0..arr_items.length() - 1) {
-                            var item: JSONObject = arr_items.getJSONObject(i)
-                            var item_title = item.getString("title")
-                            title.add(item_title)   // Add item to mutablelist title
-                            // wala pa book author and pages
-                        }
+                try {
+                    val json_obj: JSONObject = JSONObject(response.toString())
+                    val arr_items: JSONArray = json_obj.getJSONArray("book")
+                    for (i in 0..arr_items.length() - 1) {
+                        val item: JSONObject = arr_items.getJSONObject(i)
+                        val item_title = item.getString("title")
+                        title.add(item_title)   // Add item to mutablelist title
+                        // wala pa book author and pages
+                    }
 
 //                    textView.text = response.toString()
-                        textView.text = title.toString()
+                    textView.text = title.toString()
 
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
-                    }
-                },
-                Response.ErrorListener { textView.text = "That didn't work!" })
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            },
+            { textView.text = "That didn't work!" })
 
     }
 }
