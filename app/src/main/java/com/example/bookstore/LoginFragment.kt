@@ -63,7 +63,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
                             input_password.text.toString())
                     ) {
                         Toast.makeText(activity!!, "Successfully Login", Toast.LENGTH_SHORT).show()
-                        navController.navigate(R.id.action_LoginFragment_to_BookStoreFragment, bundle)
+                        navController.navigate(R.id.action_LoginFragment_to_APiFragment, bundle)
                     } else {
                         Toast.makeText(activity!!, "Login Failed", Toast.LENGTH_SHORT).show()
                     }
