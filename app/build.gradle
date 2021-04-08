@@ -55,4 +55,7 @@ dependencies {
 
     def material_version = "1.1.0-alpha07"
     implementation "com.google.android.material:material:$material_version"
+    
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 }
