@@ -14,6 +14,7 @@ import androidx.navigation.Navigation
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_a_pi.*
 import org.json.JSONArray
 import org.json.JSONException
@@ -67,8 +68,11 @@ class APiFragment : Fragment(), View.OnClickListener {
                     tvBookTitle.text = title[0]
                     tvAuthor.text = author[0].toString()
                     tvNumPage.text = numPages[0]
-                    val img = Drawable.createFromPath("https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/ableson2.jpg")
-                    ivBookImg.setImageDrawable(img)
+//                    val img = Drawable.createFromPath("https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/ableson2.jpg")
+//                    ivBookImg.setImageDrawable(img)
+
+                    val imgurl = "https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/ableson2.jpg"
+                    Picasso.get().load(imgurl).resize(50, 50).centerCrop().into(ivBookImg)
 
                 } catch (e: JSONException) {
                     e.printStackTrace()
