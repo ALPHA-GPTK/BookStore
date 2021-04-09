@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
@@ -31,7 +31,6 @@ class RecyclerAdapter(
         navController = Navigation.findNavController(parent)
 
         return ViewHolder(v)
-
     }
 
     override fun getItemCount(): Int {
@@ -68,23 +67,14 @@ class RecyclerAdapter(
                     password
                 )
                 if (insertedBook) {
-                    val snackBar = Snackbar.make(it, "Lorem ipsum", Snackbar.LENGTH_LONG)
-                    snackBar.setAction("Action") {
-                        navController.navigate(R.id.action_APiFragment_to_CartFragment)
+                    val snackBar = Snackbar.make(it, "${title[position]} has been added to cart.", Snackbar.LENGTH_LONG)
+                    val bundle = bundleOf("username" to username, "password" to password)
+                    snackBar.setAction("View Cart") {
+                        navController.navigate(R.id.action_APiFragment_to_CartFragment, bundle)
                         snackBar.dismiss()
-                    }
-                        .show()
-//                    Toast.makeText(
-//                        itemView.context,
-//                        "${title[position]} has been added to cart.",
-//                        Toast.LENGTH_LONG
-//                    ).show()
+                    }.show()
                 } else {
-                    Toast.makeText(
-                        itemView.context,
-                        "${title[position]} NOT ADDED.",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    Snackbar.make(it, "${title[position]} not added", Snackbar.LENGTH_LONG).show()
                 }
             }
         }
