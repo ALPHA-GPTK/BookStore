@@ -32,7 +32,7 @@ class MainFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         handler = DatabaseHelper(activity!!)
         when(v!!.id){
-            R.id.get_started -> navController.navigate(R.id.action_mainFragment_to_signupFragment)
+            R.id.get_started -> navController.navigate(R.id.action_mainFragment_to_loginFragment)
         }
     }
 

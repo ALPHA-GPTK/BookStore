@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -31,6 +32,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
         navController = Navigation.findNavController(view)
         view.findViewById<Button>(R.id.next_btn).setOnClickListener(this)
         view.findViewById<Button>(R.id.cancel_btn).setOnClickListener(this)
+        view.findViewById<TextView>(R.id.txv_crtAccount).setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -53,6 +55,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
             }
 
             R.id.cancel_btn -> activity!!.onBackPressed()
+            R.id.txv_crtAccount -> navController.navigate(R.id.action_LoginFragment_to_signupFragment)
         }
     }
 }

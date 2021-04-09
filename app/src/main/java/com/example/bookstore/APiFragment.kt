@@ -2,7 +2,6 @@ package com.example.bookstore
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -104,7 +103,8 @@ class APiFragment : Fragment(), View.OnClickListener, AdapterView.OnItemClickLis
             imageUrl,
             username,
             password,
-            navController
+            navController,
+            R.layout.card_item
         )
         lsw_card.adapter = adapter
     }

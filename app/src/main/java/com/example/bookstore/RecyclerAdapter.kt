@@ -22,12 +22,13 @@ class RecyclerAdapter(
     var image: MutableList<String>,
     val username: String,
     val password: String,
-    var navController: NavController
+    var navController: NavController,
+    var layout: Int
 
 ) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.card_item, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(layout, parent, false)
         navController = Navigation.findNavController(parent)
 
         return ViewHolder(v)
@@ -67,7 +68,11 @@ class RecyclerAdapter(
                     password
                 )
                 if (insertedBook) {
-                    val snackBar = Snackbar.make(it, "${title[position]} has been added to cart.", Snackbar.LENGTH_LONG)
+                    val snackBar = Snackbar.make(
+                        it,
+                        "${title[position]} has been added to cart.",
+                        Snackbar.LENGTH_LONG
+                    )
                     val bundle = bundleOf("username" to username, "password" to password)
                     snackBar.setAction("View Cart") {
                         navController.navigate(R.id.action_APiFragment_to_CartFragment, bundle)

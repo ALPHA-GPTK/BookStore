@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/nav_graph"
-            app:startDestination="@id/mainFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
 
     <!-- MainFragment -->
-    <fragment android:id="@+id/mainFragment"
-              android:name="com.example.bookstore.MainFragment"
-              android:label="fragment_main"
-              tools:layout="@layout/fragment_main">
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.bookstore.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main">
         <action
-            android:id="@+id/action_mainFragment_to_signupFragment"
-            app:destination="@id/signupFragment" />
+            android:id="@+id/action_mainFragment_to_loginFragment"
+            app:destination="@id/LoginFragment" />
 
     </fragment>
 
@@ -21,55 +22,61 @@
 
 
     <!-- LoginFragment -->
-    <fragment android:id="@+id/LoginFragment"
-              android:name="com.example.bookstore.LoginFragment"
-              android:label="fragment_login"
-              tools:layout="@layout/fragment_login">
+    <fragment
+        android:id="@+id/LoginFragment"
+        android:name="com.example.bookstore.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
 
-        <action android:id="@+id/action_LoginFragment_to_BookStoreFragment"
-                app:destination="@id/BookStoreFragment"
-                app:popEnterAnim="@anim/slide_in_left"
-        />
+        <action
+            android:id="@+id/action_LoginFragment_to_BookStoreFragment"
+            app:destination="@id/BookStoreFragment"
+            app:popEnterAnim="@anim/slide_in_left" />
         <action
             android:id="@+id/action_LoginFragment_to_APiFragment"
             app:destination="@id/APiFragment" />
+        <action
+            android:id="@+id/action_LoginFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
     </fragment>
-
 
 
     <!-- ViewBalanceFragment -->
 
 
     <!-- BookStoreFragment -->
-    <fragment android:id="@+id/BookStoreFragment"
-              android:name="com.example.bookstore.BookStoreFragment"
-              android:label="fragment_specify_amount"
-              tools:layout="@layout/fragment_book_store">
+    <fragment
+        android:id="@+id/BookStoreFragment"
+        android:name="com.example.bookstore.BookStoreFragment"
+        android:label="fragment_specify_amount"
+        tools:layout="@layout/fragment_book_store">
 
-        <argument android:name="recipient"
-                  android:defaultValue="None"/>
+        <argument
+            android:name="recipient"
+            android:defaultValue="None" />
 
-        <action android:id="@+id/action_BookStoreFragment_to_CartFragment"
-                app:destination="@id/CartFragment"
-        />
+        <action
+            android:id="@+id/action_BookStoreFragment_to_CartFragment"
+            app:destination="@id/CartFragment" />
     </fragment>
 
 
-
     <!-- CartFragment -->
-    <fragment android:id="@+id/CartFragment"
-              android:name="com.example.bookstore.CartFragment"
-              android:label="fragment_cart"
-              tools:layout="@layout/fragment_cart">
+    <fragment
+        android:id="@+id/CartFragment"
+        android:name="com.example.bookstore.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart">
 
-        <argument android:name="recipient"
-                  android:defaultValue="None"/>
+        <argument
+            android:name="recipient"
+            android:defaultValue="None" />
     </fragment>
     <fragment
         android:id="@+id/APiFragment"
         android:name="com.example.bookstore.APiFragment"
         android:label="fragment_a_pi"
-        tools:layout="@layout/fragment_a_pi" >
+        tools:layout="@layout/fragment_a_pi">
         <action
             android:id="@+id/action_APiFragment_to_CartFragment"
             app:destination="@id/CartFragment" />
@@ -78,7 +85,8 @@
     <fragment
         android:id="@+id/signupFragment"
         android:name="com.example.bookstore.SignupFragment"
-        android:label="SignupFragment" >
+        android:label="SignupFragment"
+        tools:layout="@layout/fragment_signup">
         <action
             android:id="@+id/action_signupFragment_to_LoginFragment"
             app:destination="@id/LoginFragment" />

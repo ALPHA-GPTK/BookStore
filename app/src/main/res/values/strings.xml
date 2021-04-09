@@ -10,7 +10,6 @@
     <string name="sent_money_msg">$1 was sent to ALPHA</string>
     <string name="password">Password</string>
     <string name="next">next</string>
-    <string name="cancel">Cancel</string>
     <string name="sub_desc">Lorem ipsum sit dolor amet</string>
     <string name="desc">Welcome!</string>
     <string name="mainFragment_illustration">Onboard Image Illustration</string>
@@ -32,4 +31,9 @@
     <string name="signup">Signup</string>
     <string name="email">Email</string>
     <string name="name">Name</string>
+    <string name="back">Back</string>
+    <string name="create_account">Don&apos;t have an account yet? <u>Sign Up</u></string>
+    <string name="cancel">Cancel</string>
+    <string name="alrdyAccount">Already have an account? <u>Log in</u></string>
+    <string name="delete_item">Delete</string>
 </resources>

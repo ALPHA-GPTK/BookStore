@@ -58,7 +58,8 @@ class CartFragment : Fragment() {
             imageUrl,
             username,
             password,
-            navController
+            navController,
+            R.layout.card_delete
         )
         recycler_cart_view.adapter = adapter
     }
