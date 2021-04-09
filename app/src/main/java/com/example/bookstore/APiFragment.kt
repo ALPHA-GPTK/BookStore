@@ -2,9 +2,6 @@ package com.example.bookstore
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.view.*
 import android.widget.AdapterView
 import android.widget.TextView
@@ -22,7 +19,7 @@ import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 
-class APiFragment : Fragment(), View.OnClickListener, AdapterView.OnItemClickListener {
+class APiFragment : Fragment() {
     lateinit var navController: NavController
     lateinit var username: String
     lateinit var password: String
@@ -107,18 +104,5 @@ class APiFragment : Fragment(), View.OnClickListener, AdapterView.OnItemClickLis
             R.layout.card_item
         )
         lsw_card.adapter = adapter
-    }
-
-    override fun onClick(v: View?) {
-        when (v!!.id) {
-            R.id.btn_add -> {
-                val bundle = bundleOf("username" to username, "password" to password)
-                navController.navigate(R.id.action_APiFragment_to_CartFragment, bundle)
-            }
-        }
-    }
-
-    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        TODO("Not yet implemented")
     }
 }
