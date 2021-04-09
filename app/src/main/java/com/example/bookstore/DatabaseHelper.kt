@@ -77,6 +77,40 @@ class DatabaseHelper(context: Context) :
         return true
     }
 
+    @SuppressLint("Recycle")
+    fun getBookData(
+        username: String,
+        password: String
+    ): BookDetails {
+        val title: MutableList<String> = arrayListOf()
+        val author: MutableList<String> = arrayListOf()
+        val imageUrl: MutableList<String> = arrayListOf()
+        val numPages: MutableList<String> = arrayListOf()
+
+        val db: SQLiteDatabase = readableDatabase
+
+        val userQuery = "SELECT * FROM user " +
+                "WHERE user_username = '$username' AND user_password = '$password'"
+        val userCursor = db.rawQuery(userQuery, null)
+        val userId = if (userCursor.moveToFirst()) {
+            userCursor.getInt(userCursor.getColumnIndex("user_id"))
+        } else {
+            0
+        }
+
+        val bookQuery = "SELECT * FROM book WHERE user_id = '$userId'"
+        val bookCursor = db.rawQuery(bookQuery, null)
+        while (bookCursor.moveToNext()) {
+            title.add(bookCursor.getString(bookCursor.getColumnIndex("book_name")))
+            author.add(bookCursor.getString(bookCursor.getColumnIndex("book_author")))
+            imageUrl.add(bookCursor.getString(bookCursor.getColumnIndex("book_image")))
+            numPages.add(bookCursor.getString(bookCursor.getColumnIndex("book_pages")))
+        }
+        db.close()
+
+        return BookDetails(title, author, imageUrl, numPages)
+    }
+
     fun isExists(dbName: String, username: String, password: String, userId: Int = 0): Boolean {
         val db: SQLiteDatabase = readableDatabase
         val query =
@@ -104,3 +138,10 @@ class DatabaseHelper(context: Context) :
         internal const val DATABASE_VERSION = 1
     }
 }
+
+data class BookDetails(
+    val title: MutableList<String>,
+    val author: MutableList<String>,
+    val imageUrl: MutableList<String>,
+    val numPages: MutableList<String>,
+)
