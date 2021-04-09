@@ -20,10 +20,10 @@ class LoginFragment : Fragment(), View.OnClickListener {
     lateinit var handler: DatabaseHelper
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
@@ -40,12 +40,20 @@ class LoginFragment : Fragment(), View.OnClickListener {
         when (v!!.id) {
             R.id.next_btn -> {
                 if (!TextUtils.isEmpty(input_username.text.toString())) {
-                    val bundle = bundleOf("username" to input_username.text.toString(), "password" to input_password.text.toString())
-                    if (handler.isExists("user", input_username.text.toString(),
-                            input_password.text.toString())
+                    val bundle = bundleOf(
+                        "username" to input_username.text.toString(),
+                        "password" to input_password.text.toString()
+                    )
+                    if (handler.isExists(
+                            "user", input_username.text.toString(),
+                            input_password.text.toString()
+                        )
                     ) {
                         Toast.makeText(activity!!, "Successfully Login", Toast.LENGTH_SHORT).show()
-                        navController.navigate(R.id.action_LoginFragment_to_APiFragment, bundle)
+                        navController.navigate(
+                            R.id.action_LoginFragment_to_BookStoreFragment,
+                            bundle
+                        )
                     } else {
                         Toast.makeText(activity!!, "Login Failed", Toast.LENGTH_SHORT).show()
                     }

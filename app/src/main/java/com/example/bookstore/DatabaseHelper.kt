@@ -5,7 +5,6 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.util.Log
 import android.widget.Toast
 
 class DatabaseHelper(context: Context) :
@@ -147,11 +146,11 @@ class DatabaseHelper(context: Context) :
         internal const val DATABASE_NAME = "BookStore"
         internal const val DATABASE_VERSION = 1
     }
-}
 
-data class BookDetails(
-    val title: MutableList<String>,
-    val author: MutableList<String>,
-    val imageUrl: MutableList<String>,
-    val numPages: MutableList<String>,
-)
+    data class BookDetails(
+        val title: MutableList<String>,
+        val author: MutableList<String>,
+        val imageUrl: MutableList<String>,
+        val numPages: MutableList<String>,
+    )
+}

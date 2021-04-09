@@ -38,7 +38,7 @@ class CartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        val container = activity!!.findViewById<FrameLayout>(R.id.fragment_container)
+        val container = activity!!.findViewById<FrameLayout>(R.id.container)
         val rootView = LayoutInflater.from(activity!!).inflate(R.layout.card_item, container, false)
 
         // Set Visibility of Button in CartFragment to GONE ERROR!
