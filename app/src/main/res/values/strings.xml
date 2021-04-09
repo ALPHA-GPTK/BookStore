@@ -25,4 +25,6 @@
     <string name="total_price">Total Price</string>
     <string name="logout">logout</string>
     <string name="add">add</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="book_image">Book Image</string>
 </resources>
