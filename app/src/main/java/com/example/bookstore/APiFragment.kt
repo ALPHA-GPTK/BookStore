@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -92,9 +93,10 @@ class APiFragment : Fragment(), View.OnClickListener, AdapterView.OnItemClickLis
     }
 
     override fun onClick(v: View?) {
+        val bundle = bundleOf("username" to username, "password" to password)
         when (v!!.id) {
             R.id.btn_add -> {
-                navController.navigate(R.id.action_APiFragment_to_CartFragment)
+                navController.navigate(R.id.action_APiFragment_to_CartFragment, bundle)
             }
         }
     }
