@@ -51,35 +51,65 @@ class RecyclerAdapter(
         var itemTitle: TextView = itemView.findViewById(R.id.item_title)
         var itemAuthor: TextView = itemView.findViewById(R.id.item_author)
         var itemPage: TextView = itemView.findViewById(R.id.item_page)
-        var itemButton: Button = itemView.findViewById(R.id.btn_add)
 
+        // 2131492894 for card_item layout
+        // 2131492893 for card_delete layout
+        var itemButton: Button =
+            itemView.findViewById(if (layout.toString() == "2131492894") R.id.btn_add else R.id.btn_delete_item)
 
         init {
             val db = DatabaseHelper(context)
 
-            itemButton.setOnClickListener {
-                val position: Int = adapterPosition
-                val insertedBook = db.insertBookData(
-                    title[position],
-                    author[position],
-                    image[position],
-                    page[position],
-                    username,
-                    password
-                )
-                if (insertedBook) {
-                    val snackBar = Snackbar.make(
-                        it,
-                        "${title[position]} has been added to cart.",
-                        Snackbar.LENGTH_LONG
+            if (layout.toString() == "2131492894") {
+                itemButton.setOnClickListener {
+                    val position: Int = adapterPosition
+                    val insertedBook = db.insertBookData(
+                        title[position],
+                        author[position],
+                        image[position],
+                        page[position],
+                        username,
+                        password
                     )
-                    val bundle = bundleOf("username" to username, "password" to password)
-                    snackBar.setAction("View Cart") {
-                        navController.navigate(R.id.action_BookStoreFragment_to_CartFragment, bundle)
-                        snackBar.dismiss()
-                    }.show()
-                } else {
-                    Snackbar.make(it, "${title[position]} not added", Snackbar.LENGTH_LONG).show()
+                    if (insertedBook) {
+                        val snackBar = Snackbar.make(
+                            it,
+                            "${title[position]} has been added to cart.",
+                            Snackbar.LENGTH_LONG
+                        )
+                        val bundle = bundleOf("username" to username, "password" to password)
+                        snackBar.setAction("View Cart") {
+                            navController.navigate(
+                                R.id.action_BookStoreFragment_to_CartFragment,
+                                bundle
+                            )
+                            snackBar.dismiss()
+                        }.show()
+                    } else {
+                        Snackbar.make(it, "${title[position]} not added", Snackbar.LENGTH_LONG)
+                            .show()
+                    }
+                }
+            } else if (layout.toString() == "2131492893") {
+                itemButton.setOnClickListener {
+                    val position: Int = adapterPosition
+                    val deletedBook = db.deleteBookData(
+                        title[position],
+                        author[position],
+                        username,
+                        password
+                    )
+                    if (deletedBook) {
+                        val snackBar = Snackbar.make(
+                            it,
+                            "${title[position]} has been deleted to cart.",
+                            Snackbar.LENGTH_LONG
+                        )
+                        snackBar.setAction("Undo") { snackBar.dismiss() }.show()
+                    } else {
+                        Snackbar.make(it, "${title[position]} not deleted", Snackbar.LENGTH_LONG)
+                            .show()
+                    }
                 }
             }
         }

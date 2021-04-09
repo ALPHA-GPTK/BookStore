@@ -142,6 +142,32 @@ class DatabaseHelper(context: Context) :
         return true
     }
 
+    @SuppressLint("Recycle")
+    fun deleteBookData(
+        title: String,
+        author: String,
+        username: String,
+        password: String
+    ): Boolean {
+        val db: SQLiteDatabase = writableDatabase
+
+        val userQuery = "SELECT * FROM user " +
+                "WHERE user_username = '$username' AND user_password = '$password'"
+        val userCursor = db.rawQuery(userQuery, null)
+        val userId =
+            if (userCursor.moveToFirst()) {
+                userCursor.getInt(userCursor.getColumnIndex("user_id"))
+            } else {
+                0
+            }
+
+        return db.delete(
+            "book",
+            "book_name = '$title' AND book_author = '$author' AND user_id = '$userId' ",
+            null
+        ) > 0
+    }
+
     companion object {
         internal const val DATABASE_NAME = "BookStore"
         internal const val DATABASE_VERSION = 1
