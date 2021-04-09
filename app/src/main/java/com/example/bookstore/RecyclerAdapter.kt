@@ -8,7 +8,10 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 
 class RecyclerAdapter(
@@ -18,13 +21,17 @@ class RecyclerAdapter(
     var page: MutableList<String>,
     var image: MutableList<String>,
     val username: String,
-    val password: String
+    val password: String,
+    var navController: NavController
+
 ) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.card_item, parent, false)
+        navController = Navigation.findNavController(parent)
 
         return ViewHolder(v)
+
     }
 
     override fun getItemCount(): Int {
@@ -46,6 +53,7 @@ class RecyclerAdapter(
         var itemPage: TextView = itemView.findViewById(R.id.item_page)
         var itemButton: Button = itemView.findViewById(R.id.btn_add)
 
+
         init {
             val db = DatabaseHelper(context)
 
@@ -60,11 +68,17 @@ class RecyclerAdapter(
                     password
                 )
                 if (insertedBook) {
-                    Toast.makeText(
-                        itemView.context,
-                        "${title[position]} has been added to cart.",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    val snackBar = Snackbar.make(it, "Lorem ipsum", Snackbar.LENGTH_LONG)
+                    snackBar.setAction("Action") {
+                        navController.navigate(R.id.action_APiFragment_to_CartFragment)
+                        snackBar.dismiss()
+                    }
+                        .show()
+//                    Toast.makeText(
+//                        itemView.context,
+//                        "${title[position]} has been added to cart.",
+//                        Toast.LENGTH_LONG
+//                    ).show()
                 } else {
                     Toast.makeText(
                         itemView.context,
