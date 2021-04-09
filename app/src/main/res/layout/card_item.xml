@@ -28,7 +28,8 @@
             android:layout_width="236dp"
             android:layout_height="39dp"
             android:layout_marginStart="16dp"
-            android:textSize="30sp"
+            android:textSize="26sp"
+            android:fontWeight="700"
             app:layout_constraintLeft_toRightOf="@+id/item_image"
             app:layout_constraintTop_toTopOf="parent" />
 

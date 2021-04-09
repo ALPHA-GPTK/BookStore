@@ -14,7 +14,7 @@
         <ImageView
                 android:layout_width="315dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/resume_folder_rafiki"
+                android:src="@drawable/book_screen"
                 android:adjustViewBounds="true"
                 android:id="@+id/imageView2"
                 app:layout_constraintTop_toTopOf="parent"
@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/desc"
-                    android:textSize="22sp"
+                    android:textSize="30sp"
                     android:textColor="@color/black"
                     android:id="@+id/textView3"
                     android:layout_marginBottom="10dp"

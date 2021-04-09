@@ -12,7 +12,7 @@
     <string name="next">next</string>
     <string name="cancel">Cancel</string>
     <string name="sub_desc">Lorem ipsum sit dolor amet</string>
-    <string name="desc">Lorem Ipsum</string>
+    <string name="desc">Welcome!</string>
     <string name="mainFragment_illustration">Onboard Image Illustration</string>
     <string name="books">Books</string>
     <string name="cart">Cart</string>

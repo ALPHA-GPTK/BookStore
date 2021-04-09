@@ -8,4 +8,14 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="pink">#E91E63</color>
+
+    <!--Custom Colors-->
+    <color name="blue">#01B7CD</color>
+    <color name="yellow">#F9A618</color>
+    <color name="violet">#8973B4</color>
+    <color name="red">#EF5B5B</color>
+    <color name="darker_red">#D44646</color>
+    <color name="gray">#6D7C84</color>
+    <color name="my_black">#1F1D1A</color>
+
 </resources>
