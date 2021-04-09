@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.widget.Toast
 
 class DatabaseHelper(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
@@ -27,25 +28,29 @@ class DatabaseHelper(context: Context) :
         onCreate(db)
     }
 
+    @SuppressLint("ShowToast")
     fun insertUserData(
+        context: Context,
         name: String,
         email: String,
         username: String,
         password: String
-    ) {
+    ): Toast {
         val db: SQLiteDatabase = writableDatabase
         val values = ContentValues()
 
-        if (isExists("user", username, password)) {
+        return if (!isExists("user", username, password)) {
             values.put("user_name", name)
             values.put("user_email", email)
             values.put("user_username", username)
             values.put("user_password", password)
             db.insert("user", null, values)
             db.close()
+            Toast.makeText(context, "Successfully Logged In", Toast.LENGTH_SHORT)
+        } else {
+            db.close()
+            Toast.makeText(context, "User Already Exists", Toast.LENGTH_SHORT)
         }
-
-        db.close()
     }
 
     @SuppressLint("Recycle")
@@ -73,6 +78,8 @@ class DatabaseHelper(context: Context) :
         values.put("book_pages", pages)
         values.put("user_id", userId)
         db.insert("book", null, values)
+
+        cursor.close()
         db.close()
         return true
     }
@@ -106,6 +113,8 @@ class DatabaseHelper(context: Context) :
             imageUrl.add(bookCursor.getString(bookCursor.getColumnIndex("book_image")))
             numPages.add(bookCursor.getString(bookCursor.getColumnIndex("book_pages")))
         }
+        userCursor.close()
+        bookCursor.close()
         db.close()
 
         return BookDetails(title, author, imageUrl, numPages)

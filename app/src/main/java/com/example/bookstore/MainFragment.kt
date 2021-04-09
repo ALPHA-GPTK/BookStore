@@ -14,6 +14,7 @@ import androidx.navigation.Navigation
 class MainFragment : Fragment(), View.OnClickListener {
 
     lateinit var navController: NavController
+    lateinit var handler: DatabaseHelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,8 +30,9 @@ class MainFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
+        handler = DatabaseHelper(activity!!)
         when(v!!.id){
-            R.id.get_started -> navController.navigate(R.id.action_mainFragment_to_LoginFragment)
+            R.id.get_started -> navController.navigate(R.id.action_mainFragment_to_signupFragment)
         }
     }
 
