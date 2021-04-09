@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.*
 import android.widget.AdapterView
 import android.widget.TextView
 import androidx.core.os.bundleOf
@@ -22,7 +23,6 @@ import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 
-
 class APiFragment : Fragment(), View.OnClickListener, AdapterView.OnItemClickListener {
     lateinit var navController: NavController
     lateinit var username: String
@@ -37,11 +37,18 @@ class APiFragment : Fragment(), View.OnClickListener, AdapterView.OnItemClickLis
         password = arguments!!.getString("password").toString()
     }
 
+    @Override
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.nav_cart, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_a_pi, container, false)
     }
 
@@ -88,6 +95,7 @@ class APiFragment : Fragment(), View.OnClickListener, AdapterView.OnItemClickLis
         layoutManager = LinearLayoutManager(activity!!)
 
         lsw_card.layoutManager = layoutManager
+
         adapter = RecyclerAdapter(
             activity!!,
             title,
