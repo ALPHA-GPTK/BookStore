@@ -29,4 +29,7 @@
     <string name="book_image">Book Image</string>
     <string name="settings">Settings</string>
     <string name="save">Save</string>
+    <string name="signup">Signup</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
 </resources>
