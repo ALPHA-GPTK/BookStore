@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.card_item.view.*
 import kotlinx.android.synthetic.main.fragment_cart.*
 
 class CartFragment : Fragment() {
@@ -36,13 +38,28 @@ class CartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+        val container = activity!!.findViewById<FrameLayout>(R.id.fragment_container)
+        val rootView = LayoutInflater.from(activity!!).inflate(R.layout.card_item, container, false)
+
+        // Set Visibility of Button in CartFragment to GONE ERROR!
+        rootView.btn_add.visibility = View.GONE // NOT FIXED
+
         val layoutManager = LinearLayoutManager(activity!!)
         recycler_cart_view.layoutManager = layoutManager
 
         handler = DatabaseHelper(activity!!)
         val (title, author, imageUrl, numPages) = handler.getBookData(username, password)
 
-        adapter = RecyclerAdapter(activity!!, title, author, numPages, imageUrl, username, password, navController)
+        adapter = RecyclerAdapter(
+            activity!!,
+            title,
+            author,
+            numPages,
+            imageUrl,
+            username,
+            password,
+            navController
+        )
         recycler_cart_view.adapter = adapter
     }
 }

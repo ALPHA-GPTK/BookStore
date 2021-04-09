@@ -2,6 +2,7 @@ package com.example.bookstore
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,8 +25,8 @@ import org.json.JSONObject
 
 class APiFragment : Fragment(), View.OnClickListener, AdapterView.OnItemClickListener {
     lateinit var navController: NavController
-    lateinit var  username: String
-    lateinit var  password: String
+    lateinit var username: String
+    lateinit var password: String
 
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
@@ -87,15 +88,23 @@ class APiFragment : Fragment(), View.OnClickListener, AdapterView.OnItemClickLis
         layoutManager = LinearLayoutManager(activity!!)
 
         lsw_card.layoutManager = layoutManager
-
-        adapter = RecyclerAdapter(activity!!, title, author, numPages, imageUrl, username, password, navController)
+        adapter = RecyclerAdapter(
+            activity!!,
+            title,
+            author,
+            numPages,
+            imageUrl,
+            username,
+            password,
+            navController
+        )
         lsw_card.adapter = adapter
     }
 
     override fun onClick(v: View?) {
-        val bundle = bundleOf("username" to username, "password" to password)
         when (v!!.id) {
             R.id.btn_add -> {
+                val bundle = bundleOf("username" to username, "password" to password)
                 navController.navigate(R.id.action_APiFragment_to_CartFragment, bundle)
             }
         }
