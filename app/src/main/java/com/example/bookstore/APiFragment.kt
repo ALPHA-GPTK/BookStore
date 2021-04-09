@@ -14,6 +14,7 @@ import androidx.navigation.Navigation
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley.newRequestQueue
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_shop_layout.view.*
 import org.json.JSONArray
 import org.json.JSONException
@@ -59,6 +60,7 @@ class APiFragment : Fragment(), View.OnClickListener {
         val title = mutableListOf<String>()
         var author = JSONArray()
         val numPages = mutableListOf<String>()
+        val imageUrl = mutableListOf<String>()
         var image: Drawable?
 
         val tvBookTitle = view.findViewById<TextView>(R.id.txv_booktitle)
@@ -82,14 +84,18 @@ class APiFragment : Fragment(), View.OnClickListener {
                         author = item.getJSONArray("authors")
                         numPages.add(item.getString("pageCount"))
 //                        image = Drawable.createFromPath(item.getString("ivBookImg"))
+                        imageUrl.add(item.getString("thumbnailUrl"))
                     }
 
                     tvBookTitle.text = title[0]
                     tvAuthor.text = author[0].toString()
                     tvNumPage.text = numPages[0]
-                    val img =
-                        Drawable.createFromPath("https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/ableson2.jpg")
-                    ivBookImg.setImageDrawable(img)
+                    // val img = Drawable.createFromPath("https://s3.amazonaws.com/AKIAJC5RLADLUMVRPFDQ.book-thumb-images/ableson2.jpg")
+                    // ivBookImg.setImageDrawable(img)
+
+                    val imgurl = imageUrl[0]
+                    Picasso.get().load(imgurl).resize(50, 50).centerCrop().into(ivBookImg)
+
 
                 } catch (e: JSONException) {
                     e.printStackTrace()
