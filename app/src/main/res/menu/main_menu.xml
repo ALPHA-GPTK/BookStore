@@ -5,10 +5,10 @@
     <item
         android:id="@+id/add_action"
         app:showAsAction="ifRoom"
-        android:title="Save">
-    </item>
+        android:title="@string/save" />
 
-    <item android:title="Settings"
+    <item
+        android:title="@string/settings"
         app:showAsAction="never"
-        android:id="@+id/settings_action"></item>
+        android:id="@+id/settings_action" />
 </menu>
