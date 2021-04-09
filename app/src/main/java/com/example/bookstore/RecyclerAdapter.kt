@@ -1,5 +1,6 @@
 package com.example.bookstore
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +12,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
 class RecyclerAdapter(
+    val context: Context,
     var title: MutableList<String>,
     var author: MutableList<String>,
     var page: MutableList<String>,
-    var image: MutableList<String>
+    var image: MutableList<String>,
+    val username: String,
+    val password: String
 ) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.ViewHolder {
@@ -43,14 +47,31 @@ class RecyclerAdapter(
         var itemButton: Button = itemView.findViewById(R.id.btn_add)
 
         init {
+            val db = DatabaseHelper(context)
+
             itemButton.setOnClickListener {
                 val position: Int = adapterPosition
-
-                Toast.makeText(
-                    itemView.context,
-                    "you clicked ${title[position]}",
-                    Toast.LENGTH_LONG
-                ).show()
+                val insertedBook = db.insertBookData(
+                    title[position],
+                    author[position],
+                    image[position],
+                    page[position],
+                    username,
+                    password
+                )
+                if (insertedBook) {
+                    Toast.makeText(
+                        itemView.context,
+                        "${title[position]} has been added to cart.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    Toast.makeText(
+                        itemView.context,
+                        "${title[position]} NOT ADDED.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
         }
     }

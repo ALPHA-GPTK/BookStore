@@ -52,28 +52,32 @@ class DatabaseHelper(context: Context) :
     fun insertBookData(
         title: String,
         author: String,
-//        image: String,
+        image: String,
         pages: String,
         username: String,
         password: String
-    ) {
+    ): Boolean {
         val db: SQLiteDatabase = writableDatabase
-        val query = "SELECT user_id FROM user " +
+        val query = "SELECT * FROM user " +
                 "WHERE user_username = '$username' AND user_password = '$password'"
         val cursor = db.rawQuery(query, null)
-        val values = ContentValues()
-        if (!isExists("book", title, author)) {
-            values.put("book_name", title)
-            values.put("book_author", author)
-//            values.put("book_image", image)
-            values.put("book_pages", pages)
-            values.put("user_id", cursor.moveToFirst())
-            db.insert("book", null, values)
-            db.close()
+        val userId = if (cursor.moveToFirst()) {
+            cursor.getInt(cursor.getColumnIndex("user_id"))
+        } else {
+            0
         }
+        val values = ContentValues()
+        values.put("book_name", title)
+        values.put("book_author", author)
+        values.put("book_image", image)
+        values.put("book_pages", pages)
+        values.put("user_id", userId)
+        db.insert("book", null, values)
+        db.close()
+        return true
     }
 
-    fun isExists(dbName: String, username: String, password: String): Boolean {
+    fun isExists(dbName: String, username: String, password: String, userId: Int = 0): Boolean {
         val db: SQLiteDatabase = readableDatabase
         val query =
             if (dbName == "user") {

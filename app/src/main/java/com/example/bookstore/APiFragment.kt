@@ -23,12 +23,16 @@ import org.json.JSONObject
 
 class APiFragment : Fragment(), View.OnClickListener, AdapterView.OnItemClickListener {
     lateinit var navController: NavController
+    lateinit var  username: String
+    lateinit var  password: String
 
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        username = arguments!!.getString("username").toString()
+        password = arguments!!.getString("password").toString()
     }
 
     override fun onCreateView(
@@ -83,7 +87,7 @@ class APiFragment : Fragment(), View.OnClickListener, AdapterView.OnItemClickLis
 
         lsw_card.layoutManager = layoutManager
 
-        adapter = RecyclerAdapter(title, author, numPages, imageUrl)
+        adapter = RecyclerAdapter(activity!!, title, author, numPages, imageUrl, username, password)
         lsw_card.adapter = adapter
     }
 
