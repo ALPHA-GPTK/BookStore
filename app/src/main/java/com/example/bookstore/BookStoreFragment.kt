@@ -54,6 +54,7 @@ class BookStoreFragment : Fragment() {
         val author = mutableListOf<String>()
         val numPages = mutableListOf<String>()
         val imageUrl = mutableListOf<String>()
+        val price = mutableListOf<Int>()
 
         val tvBookTitle = view.findViewById<TextView>(R.id.item_title)
 
@@ -74,6 +75,7 @@ class BookStoreFragment : Fragment() {
                         author.add(getAuthors[0] as String)
                         numPages.add(item.getString("pageCount"))
                         imageUrl.add(item.getString("thumbnailUrl"))
+                        price.add((100..999).random())
                     }
 
                 } catch (e: JSONException) {
@@ -93,6 +95,7 @@ class BookStoreFragment : Fragment() {
             author,
             numPages,
             imageUrl,
+            price,
             username,
             password,
             navController,

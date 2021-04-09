@@ -17,7 +17,7 @@ class DatabaseHelper(context: Context) :
         db.execSQL(
             "CREATE TABLE book(book_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "book_name TEXT NOT NULL, book_author TEXT NOT NULL, book_image TEXT NULL, " +
-                    "book_pages TEXT, user_id INTEGER NOT NULL, " +
+                    "book_pages TEXT, book_price INTEGER, user_id INTEGER NOT NULL, " +
                     "FOREIGN KEY (user_id) REFERENCES user (user_id) ON DELETE CASCADE ON UPDATE CASCADE)"
         )
     }
@@ -59,6 +59,7 @@ class DatabaseHelper(context: Context) :
         author: String,
         image: String,
         pages: String,
+        price: Int,
         username: String,
         password: String
     ): Boolean {
@@ -76,6 +77,7 @@ class DatabaseHelper(context: Context) :
         values.put("book_author", author)
         values.put("book_image", image)
         values.put("book_pages", pages)
+        values.put("book_price", price)
         values.put("user_id", userId)
         db.insert("book", null, values)
 
@@ -93,6 +95,7 @@ class DatabaseHelper(context: Context) :
         val author: MutableList<String> = arrayListOf()
         val imageUrl: MutableList<String> = arrayListOf()
         val numPages: MutableList<String> = arrayListOf()
+        val price: MutableList<Int> = arrayListOf()
 
         val db: SQLiteDatabase = readableDatabase
 
@@ -111,13 +114,14 @@ class DatabaseHelper(context: Context) :
             author.add(bookCursor.getString(bookCursor.getColumnIndex("book_author")))
             imageUrl.add(bookCursor.getString(bookCursor.getColumnIndex("book_image")))
             numPages.add(bookCursor.getString(bookCursor.getColumnIndex("book_pages")))
+            price.add(bookCursor.getInt(bookCursor.getColumnIndex("book_price")))
         }
 
         userCursor.close()
         bookCursor.close()
         db.close()
 
-        return BookDetails(title, author, imageUrl, numPages)
+        return BookDetails(title, author, numPages, imageUrl, price)
     }
 
     fun isExists(dbName: String, username: String, password: String, userId: Int = 0): Boolean {
@@ -178,5 +182,6 @@ class DatabaseHelper(context: Context) :
         val author: MutableList<String>,
         val imageUrl: MutableList<String>,
         val numPages: MutableList<String>,
+        val price: MutableList<Int>,
     )
 }

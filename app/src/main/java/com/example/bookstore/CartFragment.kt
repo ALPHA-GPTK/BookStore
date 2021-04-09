@@ -48,7 +48,7 @@ class CartFragment : Fragment() {
         recycler_cart_view.layoutManager = layoutManager
 
         handler = DatabaseHelper(activity!!)
-        val (title, author, imageUrl, numPages) = handler.getBookData(username, password)
+        val (title, author, numPages, imageUrl, price) = handler.getBookData(username, password)
 
         adapter = RecyclerAdapter(
             activity!!,
@@ -56,6 +56,7 @@ class CartFragment : Fragment() {
             author,
             numPages,
             imageUrl,
+            price,
             username,
             password,
             navController,

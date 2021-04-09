@@ -20,6 +20,7 @@ class RecyclerAdapter(
     var author: MutableList<String>,
     var page: MutableList<String>,
     var image: MutableList<String>,
+    var price: MutableList<Int>,
     val username: String,
     val password: String,
     var navController: NavController,
@@ -43,17 +44,20 @@ class RecyclerAdapter(
         holder.itemAuthor.text = author[position]
         holder.itemPage.text = page[position]
         Picasso.get().load(image[position]).resize(50, 50).centerCrop().into(holder.itemImage)
+        holder.itemPrice.text = price[position].toString()
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var itemImage: ImageView = itemView.findViewById(R.id.item_image)
         var itemTitle: TextView = itemView.findViewById(R.id.item_title)
         var itemAuthor: TextView = itemView.findViewById(R.id.item_author)
         var itemPage: TextView = itemView.findViewById(R.id.item_page)
+        var itemImage: ImageView = itemView.findViewById(R.id.item_image)
 
         // 2131492894 for card_item layout
         // 2131492893 for card_delete layout
+        var itemPrice: TextView =
+            itemView.findViewById(if (layout.toString() == "2131492894") R.id.item_price_item else R.id.item_price_delete)
         var itemButton: Button =
             itemView.findViewById(if (layout.toString() == "2131492894") R.id.btn_add else R.id.btn_delete_item)
 
@@ -68,6 +72,7 @@ class RecyclerAdapter(
                         author[position],
                         image[position],
                         page[position],
+                        price[position],
                         username,
                         password
                     )
