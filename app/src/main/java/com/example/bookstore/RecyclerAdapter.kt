@@ -75,7 +75,7 @@ class RecyclerAdapter(
                     )
                     val bundle = bundleOf("username" to username, "password" to password)
                     snackBar.setAction("View Cart") {
-                        navController.navigate(R.id.action_APiFragment_to_CartFragment, bundle)
+                        navController.navigate(R.id.action_BookStoreFragment_to_CartFragment, bundle)
                         snackBar.dismiss()
                     }.show()
                 } else {

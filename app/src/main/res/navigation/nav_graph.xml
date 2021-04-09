@@ -29,11 +29,11 @@
         tools:layout="@layout/fragment_login">
 
         <action
-            android:id="@+id/action_LoginFragment_to_APiFragment"
-            app:destination="@id/APiFragment" />
-        <action
             android:id="@+id/action_LoginFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_LoginFragment_to_BookStoreFragment"
+            app:destination="@id/BookStoreFragment" />
     </fragment>
 
 
@@ -41,17 +41,6 @@
 
 
     <!-- BookStoreFragment -->
-    <fragment
-        android:id="@+id/BookStoreFragment"
-        android:name="com.example.bookstore.BookStoreFragment"
-        android:label="fragment_specify_amount"
-        tools:layout="@layout/fragment_book_store">
-
-        <argument
-            android:name="recipient"
-            android:defaultValue="None" />
-
-    </fragment>
 
 
     <!-- CartFragment -->
@@ -66,12 +55,12 @@
             android:defaultValue="None" />
     </fragment>
     <fragment
-        android:id="@+id/APiFragment"
-        android:name="com.example.bookstore.APiFragment"
-        android:label="fragment_a_pi"
-        tools:layout="@layout/fragment_a_pi">
+        android:id="@+id/BookStoreFragment"
+        android:name="com.example.bookstore.BookStoreFragment"
+        android:label="fragment_book_store"
+        tools:layout="@layout/fragment_book_store">
         <action
-            android:id="@+id/action_APiFragment_to_CartFragment"
+            android:id="@+id/action_BookStoreFragment_to_CartFragment"
             app:destination="@id/CartFragment" />
     </fragment>
 
