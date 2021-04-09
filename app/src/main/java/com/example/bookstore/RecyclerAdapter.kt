@@ -3,15 +3,17 @@ package com.example.bookstore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
 class RecyclerAdapter(
     var title: MutableList<String>,
     var author: MutableList<String>,
-    var page:MutableList<String>,
+    var page: MutableList<String>,
     var image: MutableList<String>
 ) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
@@ -33,9 +35,23 @@ class RecyclerAdapter(
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         var itemImage: ImageView = itemView.findViewById(R.id.item_image)
         var itemTitle: TextView = itemView.findViewById(R.id.item_title)
         var itemAuthor: TextView = itemView.findViewById(R.id.item_author)
         var itemPage: TextView = itemView.findViewById(R.id.item_page)
+        var itemButton: Button = itemView.findViewById(R.id.btn_add)
+
+        init {
+            itemButton.setOnClickListener {
+                val position: Int = adapterPosition
+
+                Toast.makeText(
+                    itemView.context,
+                    "you clicked ${title[position]}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
     }
 }
