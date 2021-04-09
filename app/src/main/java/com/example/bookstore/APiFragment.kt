@@ -88,7 +88,7 @@ class APiFragment : Fragment(), View.OnClickListener, AdapterView.OnItemClickLis
 
         lsw_card.layoutManager = layoutManager
 
-        adapter = RecyclerAdapter(activity!!, title, author, numPages, imageUrl, username, password)
+        adapter = RecyclerAdapter(activity!!, title, author, numPages, imageUrl, username, password, navController)
         lsw_card.adapter = adapter
     }
 
