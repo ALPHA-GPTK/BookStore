@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import android.widget.Toast
 
 class DatabaseHelper(context: Context) :
@@ -104,7 +105,6 @@ class DatabaseHelper(context: Context) :
         } else {
             0
         }
-
         val bookQuery = "SELECT * FROM book WHERE user_id = '$userId'"
         val bookCursor = db.rawQuery(bookQuery, null)
         while (bookCursor.moveToNext()) {
@@ -113,6 +113,7 @@ class DatabaseHelper(context: Context) :
             imageUrl.add(bookCursor.getString(bookCursor.getColumnIndex("book_image")))
             numPages.add(bookCursor.getString(bookCursor.getColumnIndex("book_pages")))
         }
+
         userCursor.close()
         bookCursor.close()
         db.close()
