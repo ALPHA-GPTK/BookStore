@@ -32,7 +32,7 @@
     <string name="email">Email</string>
     <string name="name">Name</string>
     <string name="back">Back</string>
-    <string name="create_account">Don&apos;t have an account yet? <u>Sign Up</u></string>
+    <string name="create_account">Don\'t have an account yet? <u>Sign Up</u></string>
     <string name="cancel">Cancel</string>
     <string name="alrdyAccount">Already have an account? <u>Log in</u></string>
     <string name="delete_item">Delete</string>
