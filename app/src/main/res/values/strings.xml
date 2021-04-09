@@ -36,4 +36,8 @@
     <string name="cancel">Cancel</string>
     <string name="alrdyAccount">Already have an account? <u>Log in</u></string>
     <string name="delete_item">Delete</string>
+    <string name="BookTitle">Book Title</string>
+    <string name="Author">Author</string>
+    <string name="Pages">No. of Page(s)</string>
+    <string name="peso">₱</string>
 </resources>
