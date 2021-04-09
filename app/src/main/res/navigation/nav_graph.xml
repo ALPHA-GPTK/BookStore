@@ -29,10 +29,6 @@
         tools:layout="@layout/fragment_login">
 
         <action
-            android:id="@+id/action_LoginFragment_to_BookStoreFragment"
-            app:destination="@id/BookStoreFragment"
-            app:popEnterAnim="@anim/slide_in_left" />
-        <action
             android:id="@+id/action_LoginFragment_to_APiFragment"
             app:destination="@id/APiFragment" />
         <action
@@ -55,9 +51,6 @@
             android:name="recipient"
             android:defaultValue="None" />
 
-        <action
-            android:id="@+id/action_BookStoreFragment_to_CartFragment"
-            app:destination="@id/CartFragment" />
     </fragment>
 
 
