@@ -41,9 +41,8 @@ class BookStoreFragment : Fragment() {
     @Override
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.cart -> {
-                navController.navigate(R.id.action_BookStoreFragment_to_CartFragment)
-            }
+            R.id.cart -> navController.navigate(R.id.action_BookStoreFragment_to_CartFragment)
+            R.id.acb_btnLogout -> navController.navigate(R.id.action_BookStoreFragment_to_LoginFragment)
         }
         super.onOptionsItemSelected(item)
         return true
