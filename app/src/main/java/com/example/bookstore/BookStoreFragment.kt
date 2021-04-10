@@ -2,7 +2,6 @@ package com.example.bookstore
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -19,12 +18,17 @@ import org.json.JSONException
 import org.json.JSONObject
 
 class BookStoreFragment : Fragment() {
-    lateinit var navController: NavController
-    lateinit var layoutManager: RecyclerView.LayoutManager
-    lateinit var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>
+    private val title = mutableListOf<String>()
+    private val author = mutableListOf<String>()
+    private val numPages = mutableListOf<String>()
+    private val imageUrl = mutableListOf<String>()
+    private val price = mutableListOf<Int>()
 
-    lateinit var username: String
-    lateinit var password: String
+    private lateinit var username: String
+    private lateinit var password: String
+
+    private lateinit var navController: NavController
+    private lateinit var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +48,7 @@ class BookStoreFragment : Fragment() {
             R.id.cart -> navController.navigate(R.id.action_BookStoreFragment_to_CartFragment)
             R.id.acb_btnLogout -> navController.navigate(R.id.action_BookStoreFragment_to_LoginFragment)
         }
-        super.onOptionsItemSelected(item)
-        return true
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onCreateView(
@@ -60,13 +63,6 @@ class BookStoreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         navController = Navigation.findNavController(view)
-
-        val title = mutableListOf<String>()
-        val author = mutableListOf<String>()
-        val numPages = mutableListOf<String>()
-        val imageUrl = mutableListOf<String>()
-        val price = mutableListOf<Int>()
-
         val tvBookTitle = view.findViewById<TextView>(R.id.item_title)
 
         val queue = Volley.newRequestQueue(activity!!)
@@ -82,8 +78,7 @@ class BookStoreFragment : Fragment() {
                     for (i in 0 until arrItems.length()) {
                         val item: JSONObject = arrItems.getJSONObject(i)
                         title.add(item.getString("title"))
-                        val getAuthors = item.getJSONArray("authors")
-                        author.add(getAuthors[0] as String)
+                        author.add(item.getJSONArray("authors")[0] as String)
                         numPages.add(item.getString("pageCount"))
                         imageUrl.add(item.getString("thumbnailUrl"))
                         price.add((100..999).random())
@@ -95,10 +90,6 @@ class BookStoreFragment : Fragment() {
             }, { tvBookTitle.text = "That didn't work!" })
 
         queue.add(stringRequest)
-
-        layoutManager = LinearLayoutManager(activity!!)
-
-        book_store_rv.layoutManager = layoutManager
 
         adapter = RecyclerAdapter(
             activity!!,
@@ -113,5 +104,7 @@ class BookStoreFragment : Fragment() {
             R.layout.card_item
         )
         book_store_rv.adapter = adapter
+        book_store_rv.layoutManager = LinearLayoutManager(activity!!)
+        book_store_rv.setHasFixedSize(true)
     }
 }
