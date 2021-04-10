@@ -23,7 +23,8 @@
             android:layout_height="100dp"
             android:contentDescription="@string/book_image"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/item_title" />
+            app:layout_constraintTop_toTopOf="@+id/item_title"
+            tools:srcCompat="@drawable/ic_baseline_image_24" />
 
         <TextView
             android:id="@+id/item_title"
