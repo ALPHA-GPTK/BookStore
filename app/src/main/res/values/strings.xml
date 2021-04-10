@@ -48,4 +48,8 @@
     <string name="cart_list">Cart list</string>
     <string name="acb_account">My Account</string>
     <string name="acb_profile">Profile</string>
+    <string name="dum_amount">150</string>
+    <string name="lbl_pay">Pay now</string>
+    <string name="lbl_totalAmount">Total Amount:</string>
+    <string name="lbl_checkOut">Checkout</string>
 </resources>
