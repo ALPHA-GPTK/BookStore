@@ -8,7 +8,7 @@
     tools:context=".ProfileFragment">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/img_prfuser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -24,9 +24,9 @@
         android:layout_marginTop="24dp"
         android:text="@string/lbl_prfname"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintEnd_toEndOf="@+id/img_prfuser"
+        app:layout_constraintStart_toStartOf="@+id/img_prfuser"
+        app:layout_constraintTop_toBottomOf="@+id/img_prfuser" />
 
     <LinearLayout
         android:id="@+id/lry_prfname"
@@ -51,10 +51,10 @@
                 android:id="@+id/inp_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/inp_dummname"
                 android:hint="@string/inp_prfname"
                 android:inputType="text"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:text="@string/inp_dummname" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
@@ -94,10 +94,10 @@
                 android:id="@+id/inp_username"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/inp_dummusername"
                 android:hint="@string/inp_prfusername"
                 android:inputType="text"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:text="@string/inp_dummusername" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
@@ -138,10 +138,10 @@
                 android:id="@+id/inp_email"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/inp_dummemail"
                 android:hint="@string/inp_hntemail"
                 android:inputType="text"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:text="@string/inp_dummemail" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
