@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -44,8 +45,9 @@ class BookStoreFragment : Fragment() {
 
     @Override
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val bundle = bundleOf("username" to username, "password" to password)
         when (item.itemId) {
-            R.id.cart -> navController.navigate(R.id.action_BookStoreFragment_to_CartFragment)
+            R.id.cart -> navController.navigate(R.id.action_BookStoreFragment_to_CartFragment, bundle)
             R.id.acb_btnLogout -> navController.navigate(R.id.action_BookStoreFragment_to_LoginFragment)
         }
         return super.onOptionsItemSelected(item)
