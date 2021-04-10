@@ -25,10 +25,6 @@
         <activity
             android:name=".BookStoreFragment"
             tools:ignore="Instantiatable" />
-
-        <activity
-            android:name=".BookStoreFragment"
-            tools:ignore="Instantiatable" />
     </application>
 
 </manifest>

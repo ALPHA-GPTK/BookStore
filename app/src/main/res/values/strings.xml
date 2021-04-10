@@ -40,4 +40,5 @@
     <string name="Author">Author</string>
     <string name="Pages">No. of Page(s)</string>
     <string name="peso">₱</string>
+    <string name="login">Login</string>
 </resources>
