@@ -2,6 +2,7 @@ package com.example.bookstore
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -35,6 +36,17 @@ class BookStoreFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.nav_cart, menu)
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    @Override
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.cart -> {
+                navController.navigate(R.id.action_BookStoreFragment_to_CartFragment)
+            }
+        }
+        super.onOptionsItemSelected(item)
+        return true
     }
 
     override fun onCreateView(
