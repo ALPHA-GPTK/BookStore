@@ -10,20 +10,21 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="15dp"
         android:text="@string/signup"
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:layout_marginBottom="15dp"
-        android:layout_marginStart="82dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.415" />
 
     <View
         android:id="@+id/view"
         android:layout_width="330dp"
-        android:layout_height="350dp"
+        android:layout_height="452dp"
         android:background="@drawable/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -165,7 +166,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-        app:layout_constraintVertical_bias="0.189" />
+        app:layout_constraintVertical_bias="0.116" />
 
     <TextView
         android:id="@+id/txv_exAccount"
