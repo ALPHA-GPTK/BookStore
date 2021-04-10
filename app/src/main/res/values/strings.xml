@@ -10,8 +10,8 @@
     <string name="sent_money_msg">$1 was sent to ALPHA</string>
     <string name="password">Password</string>
     <string name="next">next</string>
-    <string name="sub_desc">Lorem ipsum sit dolor amet</string>
-    <string name="desc">Welcome!</string>
+    <string name="sub_desc">READ <b>WITHOUT</b> LIMITS</string>
+    <string name="desc">Welcome</string>
     <string name="mainFragment_illustration">Onboard Image Illustration</string>
     <string name="books">Books</string>
     <string name="cart">Cart</string>

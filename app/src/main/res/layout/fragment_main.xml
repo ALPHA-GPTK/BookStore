@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/sub_desc"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     android:textColor="@color/black"
                     android:id="@+id/textView4"
                     android:layout_marginBottom="31dp"
