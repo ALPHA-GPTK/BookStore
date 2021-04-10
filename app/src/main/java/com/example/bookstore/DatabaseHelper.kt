@@ -55,11 +55,7 @@ class DatabaseHelper(context: Context) :
 
     @SuppressLint("Recycle")
     fun insertBookData(
-        title: String,
-        author: String,
-        image: String,
-        pages: String,
-        price: Int,
+        bookInfo: BookInfo,
         username: String,
         password: String
     ): Boolean {
@@ -73,6 +69,7 @@ class DatabaseHelper(context: Context) :
             0
         }
         val values = ContentValues()
+        val (title, author, image, pages, price) = bookInfo
         values.put("book_name", title)
         values.put("book_author", author)
         values.put("book_image", image)
@@ -176,12 +173,4 @@ class DatabaseHelper(context: Context) :
         internal const val DATABASE_NAME = "BookStore"
         internal const val DATABASE_VERSION = 1
     }
-
-    data class BookDetails(
-        val title: MutableList<String>,
-        val author: MutableList<String>,
-        val numPages: MutableList<String>,
-        val imageUrl: MutableList<String>,
-        val price: MutableList<Int>,
-    )
 }

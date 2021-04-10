@@ -68,11 +68,13 @@ class RecyclerAdapter(
                 itemButton.setOnClickListener {
                     val position: Int = adapterPosition
                     val insertedBook = db.insertBookData(
-                        title[position],
-                        author[position],
-                        image[position],
-                        page[position],
-                        price[position],
+                        BookInfo(
+                            title[position],
+                            author[position],
+                            image[position],
+                            page[position],
+                            price[position],
+                        ),
                         username,
                         password
                     )
