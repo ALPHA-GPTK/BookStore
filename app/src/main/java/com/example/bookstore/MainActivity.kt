@@ -14,6 +14,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        
+        // Action bar with logo
+        supportActionBar?.apply {
+            title = "\tAlpha Bookstore"
+            setDisplayShowHomeEnabled(true)
+            setDisplayUseLogoEnabled(true)
+            setLogo(R.drawable.alpha_logo_white)
+        }
 
         fun onCreateOptionsMenu(menu: Menu?): Boolean {
             menuInflater.inflate(R.menu.main_menu,menu)
