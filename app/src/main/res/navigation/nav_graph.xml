@@ -62,6 +62,9 @@
         <action
             android:id="@+id/action_BookStoreFragment_to_CartFragment"
             app:destination="@id/CartFragment" />
+        <action
+            android:id="@+id/action_BookStoreFragment_to_LoginFragment"
+            app:destination="@id/LoginFragment" />
     </fragment>
 
     <fragment
