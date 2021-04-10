@@ -19,11 +19,7 @@ import org.json.JSONException
 import org.json.JSONObject
 
 class BookStoreFragment : Fragment() {
-    private val title = mutableListOf<String>()
-    private val author = mutableListOf<String>()
-    private val numPages = mutableListOf<String>()
-    private val imageUrl = mutableListOf<String>()
-    private val price = mutableListOf<Int>()
+    private val bookInfo = mutableListOf<BookInfo>()
 
     private lateinit var username: String
     private lateinit var password: String
@@ -47,7 +43,10 @@ class BookStoreFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val bundle = bundleOf("username" to username, "password" to password)
         when (item.itemId) {
-            R.id.cart -> navController.navigate(R.id.action_BookStoreFragment_to_CartFragment, bundle)
+            R.id.cart -> navController.navigate(
+                R.id.action_BookStoreFragment_to_CartFragment,
+                bundle
+            )
             R.id.acb_btnLogout -> navController.navigate(R.id.action_BookStoreFragment_to_LoginFragment)
         }
         return super.onOptionsItemSelected(item)
@@ -79,11 +78,15 @@ class BookStoreFragment : Fragment() {
 
                     for (i in 0 until arrItems.length()) {
                         val item: JSONObject = arrItems.getJSONObject(i)
-                        title.add(item.getString("title"))
-                        author.add(item.getJSONArray("authors")[0] as String)
-                        numPages.add(item.getString("pageCount"))
-                        imageUrl.add(item.getString("thumbnailUrl"))
-                        price.add((100..999).random())
+                        bookInfo.add(
+                            BookInfo(
+                                item.getString("title"),
+                                item.getJSONArray("authors")[0] as String,
+                                item.getString("pageCount"),
+                                item.getString("thumbnailUrl"),
+                                (100..999).random()
+                            )
+                        )
                     }
 
                 } catch (e: JSONException) {
@@ -95,11 +98,7 @@ class BookStoreFragment : Fragment() {
 
         adapter = RecyclerAdapter(
             activity!!,
-            title,
-            author,
-            numPages,
-            imageUrl,
-            price,
+            bookInfo,
             username,
             password,
             navController,

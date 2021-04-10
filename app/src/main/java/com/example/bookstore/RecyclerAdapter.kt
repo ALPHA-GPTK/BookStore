@@ -16,11 +16,7 @@ import com.squareup.picasso.Picasso
 
 class RecyclerAdapter(
     val context: Context,
-    var title: MutableList<String>,
-    var author: MutableList<String>,
-    var page: MutableList<String>,
-    var image: MutableList<String>,
-    var price: MutableList<Int>,
+    val bookInfo: MutableList<BookInfo>,
     val username: String,
     val password: String,
     var navController: NavController,
@@ -36,14 +32,15 @@ class RecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerAdapter.ViewHolder, position: Int) {
-        holder.itemTitle.text = title[position]
-        holder.itemAuthor.text = author[position]
-        holder.itemPage.text = page[position]
-        Picasso.get().load(image[position]).resize(50, 50).centerCrop().into(holder.itemImage)
-        holder.itemPrice.text = price[position].toString()
+        val currentItem = bookInfo[position]
+        holder.itemTitle.text = currentItem.title
+        holder.itemAuthor.text = currentItem.author
+        holder.itemPage.text = currentItem.numPages
+        Picasso.get().load(currentItem.imageUrl).resize(50, 50).centerCrop().into(holder.itemImage)
+        holder.itemPrice.text = currentItem.price.toString()
     }
 
-    override fun getItemCount() = title.size
+    override fun getItemCount() = bookInfo.size
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var itemTitle: TextView = itemView.findViewById(R.id.item_title)
@@ -60,25 +57,19 @@ class RecyclerAdapter(
 
         init {
             val db = DatabaseHelper(context)
-
             if (layout.toString() == "2131492894") {
                 itemButton.setOnClickListener {
-                    val position: Int = adapterPosition
-                    val insertedBook = db.insertBookData(
-                        BookInfo(
-                            title[position],
-                            author[position],
-                            image[position],
-                            page[position],
-                            price[position],
-                        ),
-                        username,
-                        password
-                    )
+                    val position = adapterPosition
+                    val currentItem = bookInfo[position]
+                    val (title, author, page, image, price) = currentItem
+                    val insertedBook =
+                        db.insertBookData(
+                            BookInfo(title, author, page, image, price), username, password
+                        )
                     if (insertedBook) {
                         val snackBar = Snackbar.make(
                             it,
-                            "${title[position]} has been added to cart.",
+                            "$title has been added to cart.",
                             Snackbar.LENGTH_LONG
                         )
                         val bundle = bundleOf("username" to username, "password" to password)
@@ -89,30 +80,28 @@ class RecyclerAdapter(
                             )
                             snackBar.dismiss()
                         }.show()
+
                     } else {
-                        Snackbar.make(it, "${title[position]} not added", Snackbar.LENGTH_LONG)
+                        Snackbar.make(it, "$title not added", Snackbar.LENGTH_LONG)
                             .show()
                     }
                 }
+
             } else if (layout.toString() == "2131492893") {
                 itemButton.setOnClickListener {
-                    val position: Int = adapterPosition
-                    val deletedBook = db.deleteBookData(
-                        title[position],
-                        author[position],
-                        username,
-                        password
-                    )
+                    val position = adapterPosition
+                    val currentItem = bookInfo[position]
+                    val (title, author, _, _, _) = currentItem
+                    val deletedBook = db.deleteBookData(title, author, username, password)
                     if (deletedBook) {
                         val snackBar = Snackbar.make(
                             it,
-                            "${title[position]} has been deleted to cart.",
+                            "$title has been deleted to cart.",
                             Snackbar.LENGTH_LONG
                         )
                         snackBar.setAction("Undo") { snackBar.dismiss() }.show()
                     } else {
-                        Snackbar.make(it, "${title[position]} not deleted", Snackbar.LENGTH_LONG)
-                            .show()
+                        Snackbar.make(it, "$title not deleted", Snackbar.LENGTH_LONG).show()
                     }
                 }
             }

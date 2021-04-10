@@ -39,16 +39,11 @@ class CartFragment : Fragment() {
         navController = Navigation.findNavController(view)
         handler = DatabaseHelper(activity!!)
 
-        val (title, author, numPages, imageUrl, price) = handler.getBookData(username, password)
-        txv_totalAmount.text = price.sum().toString()
-
+        val bookInfo = handler.getBookData(username, password)
+        txv_totalAmount.text = bookInfo.sumBy { it.price }.toString()
         adapter = RecyclerAdapter(
             activity!!,
-            title,
-            author,
-            numPages,
-            imageUrl,
-            price,
+            bookInfo,
             username,
             password,
             navController,

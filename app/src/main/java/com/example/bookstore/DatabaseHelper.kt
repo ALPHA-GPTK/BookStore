@@ -87,12 +87,8 @@ class DatabaseHelper(context: Context) :
     fun getBookData(
         username: String,
         password: String
-    ): BookDetails {
-        val title: MutableList<String> = arrayListOf()
-        val author: MutableList<String> = arrayListOf()
-        val imageUrl: MutableList<String> = arrayListOf()
-        val numPages: MutableList<String> = arrayListOf()
-        val price: MutableList<Int> = arrayListOf()
+    ): MutableList<BookInfo> {
+        val bookInfo = mutableListOf<BookInfo>()
 
         val db: SQLiteDatabase = readableDatabase
 
@@ -107,21 +103,24 @@ class DatabaseHelper(context: Context) :
         val bookQuery = "SELECT * FROM book WHERE user_id = '$userId'"
         val bookCursor = db.rawQuery(bookQuery, null)
         while (bookCursor.moveToNext()) {
-            title.add(bookCursor.getString(bookCursor.getColumnIndex("book_name")))
-            author.add(bookCursor.getString(bookCursor.getColumnIndex("book_author")))
-            imageUrl.add(bookCursor.getString(bookCursor.getColumnIndex("book_image")))
-            numPages.add(bookCursor.getString(bookCursor.getColumnIndex("book_pages")))
-            price.add(bookCursor.getInt(bookCursor.getColumnIndex("book_price")))
+            bookInfo.add(
+                BookInfo(
+                    bookCursor.getString(bookCursor.getColumnIndex("book_name")),
+                    bookCursor.getString(bookCursor.getColumnIndex("book_author")),
+                    bookCursor.getString(bookCursor.getColumnIndex("book_image")),
+                    bookCursor.getString(bookCursor.getColumnIndex("book_pages")),
+                    bookCursor.getInt(bookCursor.getColumnIndex("book_price"))
+                )
+            )
         }
-
         userCursor.close()
         bookCursor.close()
         db.close()
 
-        return BookDetails(title, author, numPages, imageUrl, price)
+        return bookInfo
     }
 
-    fun isExists(dbName: String, username: String, password: String, userId: Int = 0): Boolean {
+    fun isExists(dbName: String, username: String, password: String): Boolean {
         val db: SQLiteDatabase = readableDatabase
         val query =
             if (dbName == "user") {
