@@ -17,5 +17,7 @@
     <color name="darker_red">#D44646</color>
     <color name="gray">#6D7C84</color>
     <color name="my_black">#1F1D1A</color>
+    <color name="slight_white">#FAF8F8</color>
+
 
 </resources>

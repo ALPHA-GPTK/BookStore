@@ -39,7 +39,9 @@
     <string name="BookTitle">Book Title</string>
     <string name="Author">Author</string>
     <string name="Pages">Page(s):</string>
+    <string name="page_count">0</string>
     <string name="peso">₱</string>
     <string name="login">Login</string>
     <string name="by">by</string>
+    <string name="price">100</string>
 </resources>

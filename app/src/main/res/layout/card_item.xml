@@ -16,7 +16,6 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-
         <ImageView
             android:id="@+id/item_image"
             android:layout_width="100dp"
@@ -32,11 +31,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:fontFamily="@font/roboto"
-            android:fontWeight="700"
             android:maxLines="1"
-            android:text="Book Title"
+            android:text="@string/BookTitle"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@+id/item_image"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,6 +48,7 @@
             android:fontFamily="@font/roboto"
             android:text="@string/by"
             android:textStyle="bold"
+            android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@+id/item_image"
             app:layout_constraintTop_toBottomOf="@+id/item_title" />
 
@@ -58,8 +58,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:fontFamily="@font/roboto"
-            android:text="Juan Dela Cruz"
+            android:text="@string/Author"
             android:textSize="16sp"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/lbl_by"
             app:layout_constraintStart_toEndOf="@+id/lbl_by"
             app:layout_constraintTop_toTopOf="@+id/lbl_by"
@@ -74,6 +75,7 @@
             android:fontFamily="@font/roboto"
             android:text="@string/Pages"
             android:textStyle="bold"
+            android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@+id/item_image"
             app:layout_constraintTop_toBottomOf="@+id/item_author" />
 
@@ -83,8 +85,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:fontFamily="@font/roboto"
-            android:text="100"
+            android:text="@string/page_count"
             android:textSize="16sp"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/lbl_Page"
             app:layout_constraintStart_toEndOf="@+id/lbl_Page"
             app:layout_constraintTop_toTopOf="@+id/lbl_Page" />
@@ -96,6 +99,7 @@
             android:layout_marginEnd="4dp"
             android:fontFamily="@font/roboto"
             android:text="@string/peso"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/item_price_item"
             app:layout_constraintEnd_toStartOf="@+id/item_price_item"
             app:layout_constraintTop_toTopOf="@+id/item_price_item" />
@@ -106,8 +110,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/roboto"
-            android:text="100"
+            android:text="@string/price"
             android:textStyle="bold"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/btn_add"
             app:layout_constraintEnd_toStartOf="@+id/btn_add"
             app:layout_constraintTop_toTopOf="@+id/btn_add" />
