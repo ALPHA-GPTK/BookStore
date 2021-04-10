@@ -88,6 +88,11 @@
             app:enterAnim="@anim/slide_from_left"
             app:exitAnim="@anim/slide_to_right" />
     </fragment>
+    <activity
+        android:id="@+id/profileFragment"
+        android:name="com.example.bookstore.ProfileFragment"
+        android:label="activity_profile_fragment"
+        tools:layout="@layout/activity_profile_fragment" />
 
 
 </navigation>

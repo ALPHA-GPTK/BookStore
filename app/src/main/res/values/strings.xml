@@ -52,4 +52,20 @@
     <string name="lbl_pay">Pay now</string>
     <string name="lbl_totalAmount">Total Amount:</string>
     <string name="lbl_checkOut">Checkout</string>
+    <string name="prf_accountname">Juan Dela Cruz</string>
+    <string name="prt_username">Juan Dela</string>
+    <string name="lbl_prfname">Your Name</string>
+    <string name="lbl_prfemail">Email</string>
+    <string name="edt_dumname">Juan Dela Cruz</string>
+    <string name="edt_dumemail">juandelacruz@gmail.com</string>
+    <string name="lbl_prfusername">Username</string>
+    <string name="btn_prfupdate">Update</string>
+    <string name="btn_prfback">Back</string>
+    <string name="edt_hntemail">Email</string>
+    <string name="inp_hntemail">Email</string>
+    <string name="inp_dummemail">juandelacruz@gmail.com</string>
+    <string name="inp_prfusername">Username</string>
+    <string name="inp_dummusername">Juan Dela</string>
+    <string name="inp_prfname">Juan Dela Cruz</string>
+    <string name="inp_dummname">Juan Dela Cruz</string>
 </resources>

@@ -14,6 +14,8 @@
         android:theme="@style/Theme.BookStore"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".ProfileFragment"></activity>
+        <activity android:name=".AccountFragment" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".BookStoreFragment"
             tools:ignore="Instantiatable" />
