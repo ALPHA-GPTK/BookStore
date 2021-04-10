@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".LoginFragment">
 
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -20,18 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.346" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="330dp"
-        android:layout_height="310dp"
-        android:background="@drawable/background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.276" />
 
     <LinearLayout
         android:id="@+id/linearLayout6"
