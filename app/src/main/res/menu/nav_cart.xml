@@ -2,7 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <item
         android:id="@+id/cart"
         android:icon="@drawable/ic_cart"
@@ -19,11 +18,10 @@
             <item
                 android:id="@+id/acb_profile"
                 android:title="@string/acb_profile" />
-            
+
             <item
                 android:id="@+id/acb_btnLogout"
                 android:title="@string/acb_logout" />
         </menu>
     </item>
-
 </menu>
