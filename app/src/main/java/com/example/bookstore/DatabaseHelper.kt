@@ -180,8 +180,8 @@ class DatabaseHelper(context: Context) :
     data class BookDetails(
         val title: MutableList<String>,
         val author: MutableList<String>,
-        val imageUrl: MutableList<String>,
         val numPages: MutableList<String>,
+        val imageUrl: MutableList<String>,
         val price: MutableList<Int>,
     )
 }
