@@ -49,6 +49,7 @@ class BookStoreFragment : Fragment() {
                 bundle
             )
             R.id.acb_btnLogout -> navController.navigate(R.id.action_BookStoreFragment_to_LoginFragment)
+            R.id.acb_profile -> navController.navigate(R.id.action_BookStoreFragment_to_profileFragment)
         }
         return super.onOptionsItemSelected(item)
     }

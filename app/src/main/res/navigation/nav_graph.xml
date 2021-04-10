@@ -78,6 +78,9 @@
             app:destination="@id/LoginFragment"
             app:enterAnim="@anim/slide_from_left"
             app:exitAnim="@anim/slide_to_right" />
+        <action
+            android:id="@+id/action_BookStoreFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 
     <fragment
@@ -91,11 +94,6 @@
             app:enterAnim="@anim/slide_from_left"
             app:exitAnim="@anim/slide_to_right" />
     </fragment>
-    <activity
-        android:id="@+id/profileFragment"
-        android:name="com.example.bookstore.ProfileFragment"
-        android:label="activity_profile_fragment"
-        tools:layout="@layout/activity_profile_fragment" />
 
     <!-- Checkout Fragment-->
     <fragment
@@ -105,5 +103,10 @@
         tools:layout="@layout/fragment_checkout">
 
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.bookstore.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 
 </navigation>
