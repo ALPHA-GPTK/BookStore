@@ -14,10 +14,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_cart.*
 
-class CartFragment : Fragment() {
+class CartFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
 
     private lateinit var username: String
     private lateinit var password: String
+    private lateinit var bookInfo: MutableList<BookInfo>
 
     private lateinit var handler: DatabaseHelper
     private lateinit var navController: NavController
@@ -41,15 +42,12 @@ class CartFragment : Fragment() {
         navController = Navigation.findNavController(view)
         handler = DatabaseHelper(activity!!)
 
-        val bookInfo = handler.getBookData(username, password)
+        bookInfo = handler.getBookData(username, password)
         txv_totalAmount.text = bookInfo.sumBy { it.price }.toString()
         adapter = RecyclerAdapter(
-            activity!!,
             bookInfo,
-            username,
-            password,
-            navController,
-            R.layout.card_delete
+            this,
+            R.layout.card_delete,
         )
         recycler_cart_view.adapter = adapter
         recycler_cart_view.layoutManager = LinearLayoutManager(activity!!)
@@ -71,6 +69,28 @@ class CartFragment : Fragment() {
                 )
                 snackBar.dismiss()
             }.show()
+        }
+    }
+
+    override fun onItemClick(position: Int) {
+        val currentItem = bookInfo[position]
+        val db = DatabaseHelper(activity!!)
+        val (title, author, _, _, _) = currentItem
+
+        if (db.deleteBookData(title, author, username, password)) {
+            adapter.notifyItemRemoved(position)
+            val snackBar = Snackbar.make(
+                activity!!.findViewById(android.R.id.content),
+                "$title has been deleted to cart.",
+                Snackbar.LENGTH_LONG
+            )
+            snackBar.setAction("Undo") { snackBar.dismiss() }.show()
+        } else {
+            Snackbar.make(
+                activity!!.findViewById(android.R.id.content),
+                "$title not deleted",
+                Snackbar.LENGTH_LONG
+            ).show()
         }
     }
 }
