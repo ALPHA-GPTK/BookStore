@@ -2,6 +2,7 @@ package com.example.bookstore
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import androidx.core.os.bundleOf
