@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_cart.*
 
 class CartFragment : Fragment() {
@@ -52,5 +54,23 @@ class CartFragment : Fragment() {
         recycler_cart_view.adapter = adapter
         recycler_cart_view.layoutManager = LinearLayoutManager(activity!!)
         recycler_cart_view.setHasFixedSize(true)
+
+        btn_pay.setOnClickListener {
+            val snackBar = Snackbar.make(
+                it,
+                "Checkout success",
+                Snackbar.LENGTH_LONG
+            )
+
+            val bundle = bundleOf("username" to username, "password" to password)
+
+            snackBar.setAction("View Checkout") {
+                navController.navigate(
+                    R.id.action_CartFragment_to_CheckoutFragment,
+                    bundle
+                )
+                snackBar.dismiss()
+            }.show()
+        }
     }
 }

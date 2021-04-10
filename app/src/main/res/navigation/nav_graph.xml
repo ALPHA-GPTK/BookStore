@@ -59,6 +59,9 @@
         <argument
             android:name="recipient"
             android:defaultValue="None" />
+        <action
+            android:id="@+id/action_CartFragment_to_CheckoutFragment"
+            app:destination="@id/CheckoutFragment" />
     </fragment>
     <fragment
         android:id="@+id/BookStoreFragment"
@@ -89,5 +92,13 @@
             app:exitAnim="@anim/slide_to_right" />
     </fragment>
 
+    <!-- Checkout Fragment-->
+    <fragment
+        android:id="@+id/CheckoutFragment"
+        android:name="com.example.bookstore.CheckoutFragment"
+        android:label="CheckoutFragment"
+        tools:layout="@layout/fragment_checkout">
+
+    </fragment>
 
 </navigation>
