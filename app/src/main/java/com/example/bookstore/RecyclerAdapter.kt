@@ -35,10 +35,6 @@ class RecyclerAdapter(
         return ViewHolder(v)
     }
 
-    override fun getItemCount(): Int {
-        return title.size
-    }
-
     override fun onBindViewHolder(holder: RecyclerAdapter.ViewHolder, position: Int) {
         holder.itemTitle.text = title[position]
         holder.itemAuthor.text = author[position]
@@ -47,8 +43,9 @@ class RecyclerAdapter(
         holder.itemPrice.text = price[position].toString()
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    override fun getItemCount() = title.size
 
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var itemTitle: TextView = itemView.findViewById(R.id.item_title)
         var itemAuthor: TextView = itemView.findViewById(R.id.item_author)
         var itemPage: TextView = itemView.findViewById(R.id.item_page)
