@@ -17,49 +17,36 @@
         android:padding="16dp">
 
 
-        <TextView
-            android:id="@+id/lbl_bookTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/roboto"
-            android:text="@string/BookTitle"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/item_image"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <ImageView
             android:id="@+id/item_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:contentDescription="@string/book_image"
-            app:layout_constraintBottom_toBottomOf="@+id/item_page"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/lbl_bookTitle" />
+            app:layout_constraintTop_toTopOf="@+id/item_title" />
 
         <TextView
             android:id="@+id/item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto"
             android:fontWeight="700"
             android:maxLines="1"
             android:text="Book Title"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/item_image"
-            app:layout_constraintTop_toBottomOf="@+id/lbl_bookTitle" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/lbl_author"
+            android:id="@+id/lbl_by"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto"
-            android:text="@string/Author"
+            android:text="@string/by"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/item_image"
             app:layout_constraintTop_toBottomOf="@+id/item_title" />
@@ -68,13 +55,14 @@
             android:id="@+id/item_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="4dp"
             android:fontFamily="@font/roboto"
             android:text="Juan Dela Cruz"
             android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/item_image"
-            app:layout_constraintTop_toBottomOf="@+id/lbl_author" />
+            app:layout_constraintBottom_toBottomOf="@+id/lbl_by"
+            app:layout_constraintStart_toEndOf="@+id/lbl_by"
+            app:layout_constraintTop_toTopOf="@+id/lbl_by"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/lbl_Page"
@@ -92,13 +80,36 @@
             android:id="@+id/item_page"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="4dp"
             android:fontFamily="@font/roboto"
             android:text="100"
             android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/item_image"
-            app:layout_constraintTop_toBottomOf="@+id/lbl_Page" />
+            app:layout_constraintBottom_toBottomOf="@+id/lbl_Page"
+            app:layout_constraintStart_toEndOf="@+id/lbl_Page"
+            app:layout_constraintTop_toTopOf="@+id/lbl_Page" />
+
+        <TextView
+            android:id="@+id/lbl_peso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/peso"
+            app:layout_constraintBottom_toBottomOf="@+id/item_price_item"
+            app:layout_constraintEnd_toStartOf="@+id/item_price_item"
+            app:layout_constraintTop_toTopOf="@+id/item_price_item" />
+
+        <TextView
+            android:id="@+id/item_price_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/roboto"
+            android:text="100"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_add"
+            app:layout_constraintEnd_toStartOf="@+id/btn_add"
+            app:layout_constraintTop_toTopOf="@+id/btn_add" />
 
         <Button
             android:id="@+id/btn_add"
@@ -112,30 +123,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_page" />
-
-        <TextView
-            android:id="@+id/item_price_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="@font/roboto"
-            android:text="100"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_add"
-            app:layout_constraintEnd_toStartOf="@+id/btn_add"
-            app:layout_constraintTop_toTopOf="@+id/btn_add" />
-
-        <TextView
-            android:id="@+id/lbl_peso"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:fontFamily="@font/roboto"
-            android:text="@string/peso"
-            app:layout_constraintBottom_toBottomOf="@+id/item_price_item"
-            app:layout_constraintEnd_toStartOf="@+id/item_price_item"
-            app:layout_constraintTop_toTopOf="@+id/item_price_item" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
