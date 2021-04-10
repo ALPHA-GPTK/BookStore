@@ -13,7 +13,9 @@
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_loginFragment"
-            app:destination="@id/LoginFragment" />
+            app:destination="@id/LoginFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left" />
 
     </fragment>
 
@@ -30,10 +32,14 @@
 
         <action
             android:id="@+id/action_LoginFragment_to_signupFragment"
-            app:destination="@id/signupFragment" />
+            app:destination="@id/signupFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left" />
         <action
             android:id="@+id/action_LoginFragment_to_BookStoreFragment"
-            app:destination="@id/BookStoreFragment" />
+            app:destination="@id/BookStoreFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left" />
     </fragment>
 
 
@@ -61,10 +67,14 @@
         tools:layout="@layout/fragment_book_store">
         <action
             android:id="@+id/action_BookStoreFragment_to_CartFragment"
-            app:destination="@id/CartFragment" />
+            app:destination="@id/CartFragment"
+            app:enterAnim="@anim/slide_from_right"
+            app:exitAnim="@anim/slide_to_left" />
         <action
             android:id="@+id/action_BookStoreFragment_to_LoginFragment"
-            app:destination="@id/LoginFragment" />
+            app:destination="@id/LoginFragment"
+            app:enterAnim="@anim/slide_from_left"
+            app:exitAnim="@anim/slide_to_right" />
     </fragment>
 
     <fragment
@@ -74,7 +84,9 @@
         tools:layout="@layout/fragment_signup">
         <action
             android:id="@+id/action_signupFragment_to_LoginFragment"
-            app:destination="@id/LoginFragment" />
+            app:destination="@id/LoginFragment"
+            app:enterAnim="@anim/slide_from_left"
+            app:exitAnim="@anim/slide_to_right" />
     </fragment>
 
 
