@@ -9,9 +9,11 @@
         android:id="@+id/recycler_cart_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_checkout"
         tool:listitem="@layout/card_delete" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottom_checkout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
