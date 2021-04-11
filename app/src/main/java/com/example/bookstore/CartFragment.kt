@@ -15,19 +15,20 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_cart.*
 
 class CartFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
-
     private lateinit var username: String
     private lateinit var password: String
     private lateinit var bookInfo: MutableList<BookInfo>
 
-    private lateinit var handler: DatabaseHelper
-    private lateinit var navController: NavController
     private lateinit var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>
+    private lateinit var navController: NavController
+    private lateinit var bundle: Bundle
+    private lateinit var db: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         username = arguments!!.getString("username").toString()
         password = arguments!!.getString("password").toString()
+        bundle = bundleOf("username" to username, "password" to password)
     }
 
     override fun onCreateView(
@@ -40,51 +41,50 @@ class CartFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        handler = DatabaseHelper(activity!!)
+        db = DatabaseHelper(activity!!)
 
-        bookInfo = handler.getBookData(username, password)
+        bookInfo = db.getBookData(username, password)
+
+        // Calculate Total Price
         txv_totalAmount.text = bookInfo.sumBy { it.price }.toString()
-        adapter = RecyclerAdapter(
-            bookInfo,
-            this,
-            R.layout.card_delete,
-        )
+
+        adapter = RecyclerAdapter(bookInfo, this, R.layout.card_delete)
         recycler_cart_view.adapter = adapter
         recycler_cart_view.layoutManager = LinearLayoutManager(activity!!)
         recycler_cart_view.setHasFixedSize(true)
 
         btn_pay.setOnClickListener {
-            val snackBar = Snackbar.make(
-                it,
-                "Checkout success",
-                Snackbar.LENGTH_LONG
-            )
-
-            val bundle = bundleOf("username" to username, "password" to password)
-
-            snackBar.setAction("View Checkout") {
-                navController.navigate(
-                    R.id.action_CartFragment_to_CheckoutFragment,
-                    bundle
-                )
-                snackBar.dismiss()
-            }.show()
+            Snackbar.make(it, "Checkout success", Snackbar.LENGTH_LONG).apply {
+                this.setAction("View Checkout") {
+                    navController.navigate(
+                        R.id.action_CartFragment_to_CheckoutFragment,
+                        bundle
+                    )
+                    this.dismiss()
+                }.show()
+            }
         }
     }
 
     override fun onItemClick(position: Int) {
         val currentItem = bookInfo[position]
-        val db = DatabaseHelper(activity!!)
-        val (title, author, _, _, _) = currentItem
+        val (id, title, author, _, _, _) = currentItem
 
-        if (db.deleteBookData(title, author, username, password)) {
+        val numDeleted = db.deleteBookData(id, title, author, username, password)
+        if (numDeleted > 0) {
+            bookInfo.removeAt(position).apply {
+                // Update Total Price
+                txv_totalAmount.text =
+                    (Integer.parseInt(txv_totalAmount.text.toString()) - this.price).toString()
+            }
             adapter.notifyItemRemoved(position)
-            val snackBar = Snackbar.make(
+
+            Snackbar.make(
                 activity!!.findViewById(android.R.id.content),
                 "$title has been deleted to cart.",
-                Snackbar.LENGTH_LONG
-            )
-            snackBar.setAction("Undo") { snackBar.dismiss() }.show()
+                Snackbar.LENGTH_SHORT
+            ).apply { this.setAction("Undo") { this.dismiss() }.show() }
+
         } else {
             Snackbar.make(
                 activity!!.findViewById(android.R.id.content),

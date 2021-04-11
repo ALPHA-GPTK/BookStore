@@ -63,13 +63,15 @@ class DatabaseHelper(context: Context) :
         val query = "SELECT * FROM user " +
                 "WHERE user_username = '$username' AND user_password = '$password'"
         val cursor = db.rawQuery(query, null)
-        val userId = if (cursor.moveToFirst()) {
-            cursor.getInt(cursor.getColumnIndex("user_id"))
-        } else {
-            0
-        }
+        val userId =
+            if (cursor.moveToFirst()) {
+                cursor.getInt(cursor.getColumnIndex("user_id"))
+            } else {
+                0
+            }
+
         val values = ContentValues()
-        val (title, author, image, pages, price) = bookInfo
+        val (_, title, author, image, pages, price) = bookInfo
         values.put("book_name", title)
         values.put("book_author", author)
         values.put("book_image", image)
@@ -105,6 +107,7 @@ class DatabaseHelper(context: Context) :
         while (bookCursor.moveToNext()) {
             bookInfo.add(
                 BookInfo(
+                    bookCursor.getInt(bookCursor.getColumnIndex("book_id")),
                     bookCursor.getString(bookCursor.getColumnIndex("book_name")),
                     bookCursor.getString(bookCursor.getColumnIndex("book_author")),
                     bookCursor.getString(bookCursor.getColumnIndex("book_image")),
@@ -144,11 +147,12 @@ class DatabaseHelper(context: Context) :
 
     @SuppressLint("Recycle")
     fun deleteBookData(
+        id: Int,
         title: String,
         author: String,
         username: String,
         password: String
-    ): Boolean {
+    ): Int {
         val db: SQLiteDatabase = writableDatabase
 
         val userQuery = "SELECT * FROM user " +
@@ -163,9 +167,9 @@ class DatabaseHelper(context: Context) :
 
         return db.delete(
             "book",
-            "book_name = '$title' AND book_author = '$author' AND user_id = '$userId' ",
+            "book_id = '$id' AND book_name = '$title' AND book_author = '$author' AND user_id = '$userId' ",
             null
-        ) > 0
+        )
     }
 
     companion object {
