@@ -66,6 +66,6 @@
     <string name="inp_dummemail">juandelacruz@gmail.com</string>
     <string name="inp_prfusername">Username</string>
     <string name="inp_dummusername">Juan Dela</string>
-    <string name="inp_prfname">Juan Dela Cruz</string>
+    <string name="inp_prfname">Name</string>
     <string name="inp_dummname">Juan Dela Cruz</string>
 </resources>
