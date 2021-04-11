@@ -8,8 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -24,7 +22,6 @@ class BookStoreFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
     private lateinit var password: String
     private var bookList = mutableListOf<BookInfo>()
 
-    private lateinit var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>
     private lateinit var navController: NavController
     private lateinit var bundle: Bundle
 
@@ -43,7 +40,6 @@ class BookStoreFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
 
     @Override
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val bundle = bundleOf("username" to username, "password" to password)
         when (item.itemId) {
             R.id.cart -> navController.navigate(
                 R.id.action_BookStoreFragment_to_CartFragment,
@@ -71,58 +67,8 @@ class BookStoreFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         navController = Navigation.findNavController(view)
-//        val container = activity!!.findViewById<FrameLayout>(R.id.container)
-//        val rootView = LayoutInflater.from(activity!!).inflate(R.layout.card_item, container, false)
-//        val btn = rootView.findViewById<Button>(R.id.btn_add)
-//        btn.setBackgroundResource(R.color.red)
-
-        val queue = Volley.newRequestQueue(activity!!)
-        val url = "http://10.0.2.2/PHP_acad/FinalProject/"
-
-        val stringRequest = StringRequest(
-            Request.Method.GET, url, { response ->
-                try {
-                    val jsonObject = JSONObject(response.toString())
-                    val arrItems: JSONArray = jsonObject.getJSONArray("book")
-
-                    for (i in 0 until arrItems.length()) {
-                        val item: JSONObject = arrItems.getJSONObject(i)
-                        bookList.add(
-                            BookInfo(
-                                0,
-                                item.getString("title"),
-                                item.getJSONArray("authors")[0] as String,
-                                item.getString("pageCount"),
-                                item.getString("thumbnailUrl"),
-                                (100..999).random()
-                            )
-                        )
-                    }
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                }
-                adapter = RecyclerAdapter(bookList, this, R.layout.card_item)
-                book_store_rv.adapter = adapter
-                book_store_rv.layoutManager = LinearLayoutManager(activity!!)
-                book_store_rv.setHasFixedSize(true)
-            }, {
-                repeat(5) {
-                    bookList.add(
-                        BookInfo(
-                            0,
-                            "That didn't work!",
-                            "That didn't work!",
-                            "That didn't work!",
-                            "https://homepages.cae.wisc.edu/~ece533/images/cat.png",
-                            0
-                        )
-                    )
-                }
-            })
-
-        queue.add(stringRequest)
+        getBookData()
     }
 
     override fun onItemClick(position: Int) {
@@ -151,6 +97,50 @@ class BookStoreFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
                 Snackbar.LENGTH_LONG
             ).show()
         }
+    }
+
+    private fun getBookData() {
+        val queue = Volley.newRequestQueue(activity)
+        val url = "http://10.0.2.2/PHP_acad/FinalProject/"
+        val stringRequest = StringRequest(
+            Request.Method.GET, url, { response ->
+                try {
+                    val jsonObject = JSONObject(response.toString())
+                    val arrItems: JSONArray = jsonObject.getJSONArray("book")
+
+                    for (i in 0 until arrItems.length()) {
+                        val item: JSONObject = arrItems.getJSONObject(i)
+                        bookList.add(
+                            BookInfo(
+                                0,
+                                item.getString("title"),
+                                item.getJSONArray("authors")[0] as String,
+                                item.getString("pageCount"),
+                                item.getString("thumbnailUrl"),
+                                (100..999).random()
+                            )
+                        )
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+                initRecycler(activity!!, bookList, this, book_store_rv, R.layout.card_item)
+            }, {
+                repeat(5) {
+                    bookList.add(
+                        BookInfo(
+                            0,
+                            "That didn't work!",
+                            "That didn't work!",
+                            "That didn't work!",
+                            "https://homepages.cae.wisc.edu/~ece533/images/cat.png",
+                            0
+                        )
+                    )
+                }
+            })
+
+        queue.add(stringRequest)
     }
 }
 
