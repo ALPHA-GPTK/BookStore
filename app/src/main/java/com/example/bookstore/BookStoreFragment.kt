@@ -2,7 +2,6 @@ package com.example.bookstore
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -20,10 +19,9 @@ import org.json.JSONException
 import org.json.JSONObject
 
 class BookStoreFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
-
     private lateinit var username: String
     private lateinit var password: String
-    private var bookInfo = mutableListOf<BookInfo>()
+    private var bookList = mutableListOf<BookInfo>()
 
     private lateinit var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>
     private lateinit var navController: NavController
@@ -51,7 +49,10 @@ class BookStoreFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
                 bundle
             )
             R.id.acb_btnLogout -> navController.navigate(R.id.action_BookStoreFragment_to_LoginFragment)
-            R.id.acb_profile -> navController.navigate(R.id.action_BookStoreFragment_to_profileFragment)
+            R.id.acb_profile -> navController.navigate(
+                R.id.action_BookStoreFragment_to_profileFragment,
+                bundle
+            )
         }
         return super.onOptionsItemSelected(item)
     }
@@ -80,13 +81,13 @@ class BookStoreFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
             Request.Method.GET, url, { response ->
                 try {
                     val jsonObject = JSONObject(response.toString())
-                    Log.i("details", "here")
                     val arrItems: JSONArray = jsonObject.getJSONArray("book")
 
                     for (i in 0 until arrItems.length()) {
                         val item: JSONObject = arrItems.getJSONObject(i)
-                        bookInfo.add(
+                        bookList.add(
                             BookInfo(
+                                0,
                                 item.getString("title"),
                                 item.getJSONArray("authors")[0] as String,
                                 item.getString("pageCount"),
@@ -100,12 +101,13 @@ class BookStoreFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
                 }
             }, {
                 repeat(5) {
-                    bookInfo.add(
+                    bookList.add(
                         BookInfo(
+                            0,
                             "That didn't work!",
                             "That didn't work!",
                             "That didn't work!",
-                            "https://homepages.cae.wisc.edu/~ece533/images/",
+                            "https://homepages.cae.wisc.edu/~ece533/images/cat.png",
                             0
                         )
                     )
@@ -114,34 +116,31 @@ class BookStoreFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
 
         queue.add(stringRequest)
 
-        adapter = RecyclerAdapter(bookInfo, this, R.layout.card_item)
+        adapter = RecyclerAdapter(bookList, this, R.layout.card_item)
         book_store_rv.adapter = adapter
         book_store_rv.layoutManager = LinearLayoutManager(activity!!)
         book_store_rv.setHasFixedSize(true)
     }
 
     override fun onItemClick(position: Int) {
-        val currentItem = bookInfo[position]
+        val currentItem = bookList[position]
+        val (id, title, author, page, image, price) = currentItem
         val db = DatabaseHelper(context!!)
-        val (title, author, page, image, price) = currentItem
         val insertedBook =
-            db.insertBookData(
-                BookInfo(title, author, page, image, price), username, password
-            )
+            db.insertBookData(BookInfo(id, title, author, page, image, price), username, password)
+
         if (insertedBook) {
-            adapter.notifyDataSetChanged()
-            val snackBar = Snackbar.make(
+            Snackbar.make(
                 activity!!.findViewById(android.R.id.content),
                 "$title has been added to cart.",
                 Snackbar.LENGTH_LONG
-            )
-            snackBar.setAction("View Cart") {
-                navController.navigate(
-                    R.id.action_BookStoreFragment_to_CartFragment,
-                    bundle
-                )
-                snackBar.dismiss()
-            }.show()
+            ).apply {
+                this.setAction("View Cart") {
+                    navController.navigate(R.id.action_BookStoreFragment_to_CartFragment, bundle)
+                    this.dismiss()
+                }.show()
+            }
+
         } else {
             Snackbar.make(
                 activity!!.findViewById(android.R.id.content),
