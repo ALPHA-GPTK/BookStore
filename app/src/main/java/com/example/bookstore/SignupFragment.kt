@@ -1,9 +1,11 @@
 package com.example.bookstore
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -38,6 +40,8 @@ class SignupFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
+        val inputMethodManager =
+            context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager   //  Hide keyword when button clicked
         handler = DatabaseHelper(activity!!)
         when (v!!.id) {
             R.id.sign_up -> {
@@ -45,14 +49,13 @@ class SignupFragment : Fragment(), View.OnClickListener {
                     activity!!,
                     input_name.text.toString(),
                     input_email.text.toString(),
-                    input_username.text.toString(),
-                    input_password.text.toString()
+                    inp_loginusername.text.toString(),
+                    inp_loginpass.text.toString()
                 ).show()
-
+                inputMethodManager.hideSoftInputFromWindow(v.windowToken, 0)    //  Hide keyword when button clicked
                 navController.navigate(R.id.action_signupFragment_to_LoginFragment)
             }
             R.id.txv_exAccount -> navController.navigate(R.id.action_signupFragment_to_LoginFragment)
         }
     }
-
 }

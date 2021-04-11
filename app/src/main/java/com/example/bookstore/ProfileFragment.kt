@@ -1,11 +1,14 @@
 package com.example.bookstore
 
+import android.content.Context
+import android.hardware.input.InputManager
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -52,6 +55,8 @@ class ProfileFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
+        val inputManager =
+            context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager   //  Hide keyword when button clicked
         bundle = bundleOf("username" to username, "password" to password)
         when (v!!.id) {
             R.id.btn_update -> {
@@ -77,6 +82,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                         Snackbar.LENGTH_SHORT
                     )
                 }
+                inputManager.hideSoftInputFromWindow(v.windowToken, 0)  //  Hide keyword when button clicked
             }
             R.id.btn_back -> navController.navigate(
                 R.id.action_profileFragment_to_BookStoreFragment,

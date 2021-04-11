@@ -1,10 +1,12 @@
 package com.example.bookstore
 
+import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -32,16 +34,20 @@ class LoginFragment : Fragment(), View.OnClickListener {
         navController = Navigation.findNavController(view)
         db = DatabaseHelper(activity!!)
 
-        view.findViewById<Button>(R.id.next_btn).setOnClickListener(this)
+        view.findViewById<Button>(R.id.btn_login).setOnClickListener(this)
         view.findViewById<Button>(R.id.cancel_btn).setOnClickListener(this)
         view.findViewById<TextView>(R.id.txv_crtAccount).setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
+
         when (v!!.id) {
-            R.id.next_btn -> {
-                val username = input_username.text.toString()
-                val password = input_password.text.toString()
+            R.id.btn_login -> {
+                val inputMethodManager =
+                    context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager   //  Hide keyword when button clicked
+
+                val username = inp_loginusername.text.toString()
+                val password = inp_loginpass.text.toString()
                 if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
                     val bundle = bundleOf("username" to username, "password" to password)
 
@@ -55,6 +61,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
                             R.id.action_LoginFragment_to_BookStoreFragment,
                             bundle
                         )
+                        inputMethodManager.hideSoftInputFromWindow(v.windowToken, 0)    //  Hide keyword when button clicked
                     } else {
                         Toast.makeText(
                             activity!!,
