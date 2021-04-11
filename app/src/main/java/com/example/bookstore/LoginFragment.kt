@@ -16,8 +16,8 @@ import kotlinx.android.synthetic.main.fragment_login.*
 
 
 class LoginFragment : Fragment(), View.OnClickListener {
-    lateinit var navController: NavController
-    lateinit var handler: DatabaseHelper
+    private lateinit var navController: NavController
+    private lateinit var db: DatabaseHelper
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,38 +30,44 @@ class LoginFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+        db = DatabaseHelper(activity!!)
+
         view.findViewById<Button>(R.id.next_btn).setOnClickListener(this)
         view.findViewById<Button>(R.id.cancel_btn).setOnClickListener(this)
         view.findViewById<TextView>(R.id.txv_crtAccount).setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
-        handler = DatabaseHelper(activity!!)
         when (v!!.id) {
             R.id.next_btn -> {
-                if (!TextUtils.isEmpty(input_username.text.toString())) {
-                    val bundle = bundleOf(
-                        "username" to input_username.text.toString(),
-                        "password" to input_password.text.toString()
-                    )
-                    if (handler.isExists(
-                            "user", input_username.text.toString(),
-                            input_password.text.toString()
-                        )
-                    ) {
-                        Toast.makeText(activity!!, "Successfully Login", Toast.LENGTH_SHORT).show()
+                val username = input_username.text.toString()
+                val password = input_password.text.toString()
+                if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)) {
+                    val bundle = bundleOf("username" to username, "password" to password)
+
+                    if (db.isExists("user", username, password)) {
+                        Toast.makeText(
+                            activity!!,
+                            "Successfully Login",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         navController.navigate(
                             R.id.action_LoginFragment_to_BookStoreFragment,
                             bundle
                         )
                     } else {
-                        Toast.makeText(activity!!, "Login Failed", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            activity!!,
+                            "Login Failed.\nCreate an account first.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
+                } else if (TextUtils.isEmpty(username)) {
+                    Toast.makeText(activity!!, "Enter a username", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(activity, "Enter a name", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity!!, "Enter a password", Toast.LENGTH_SHORT).show()
                 }
             }
-
             R.id.cancel_btn -> activity!!.onBackPressed()
             R.id.txv_crtAccount -> navController.navigate(R.id.action_LoginFragment_to_signupFragment)
         }
