@@ -42,7 +42,7 @@
             app:boxBackgroundColor="@color/slight_white">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_username"
+                android:id="@+id/inp_loginusername"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/username"
@@ -76,7 +76,7 @@
             app:boxBackgroundColor="@color/slight_white">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_password"
+                android:id="@+id/inp_loginpass"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/password"
@@ -87,7 +87,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/next_btn"
+        android:id="@+id/btn_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -103,7 +103,7 @@
         android:layout_marginStart="8dp"
         android:text="@string/back"
         app:layout_constraintStart_toStartOf="@+id/txv_crtAccount"
-        app:layout_constraintTop_toTopOf="@+id/next_btn" />
+        app:layout_constraintTop_toTopOf="@+id/btn_login" />
 
     <TextView
         android:id="@+id/txv_crtAccount"

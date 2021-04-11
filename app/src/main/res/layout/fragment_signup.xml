@@ -40,8 +40,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="60"
-            app:errorEnabled="true"
-            app:boxBackgroundColor="@color/slight_white">
+            app:boxBackgroundColor="@color/slight_white"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input_name"
@@ -49,7 +49,8 @@
                 android:layout_height="match_parent"
                 android:hint="@string/name"
                 android:inputType="text"
-                android:maxLines="1" />
+                android:maxLines="1"
+                app:hintAnimationEnabled="false" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
@@ -69,8 +70,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="60"
-            app:errorEnabled="true"
-            app:boxBackgroundColor="@color/slight_white">
+            app:boxBackgroundColor="@color/slight_white"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/input_email"
@@ -98,11 +99,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="60"
-            app:errorEnabled="true"
-            app:boxBackgroundColor="@color/slight_white">
+            app:boxBackgroundColor="@color/slight_white"
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_username"
+                android:id="@+id/inp_loginusername"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/username"
@@ -130,12 +131,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="60"
+            app:boxBackgroundColor="@color/slight_white"
             app:endIconMode="password_toggle"
-            app:errorEnabled="true"
-            app:boxBackgroundColor="@color/slight_white">
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_password"
+                android:id="@+id/inp_loginpass"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/password"
@@ -160,15 +161,14 @@
         android:id="@+id/txv_exAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:clickable="true"
         android:focusable="true"
         android:text="@string/alrdyAccount"
         android:textColor="@color/black"
-        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sign_up" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
