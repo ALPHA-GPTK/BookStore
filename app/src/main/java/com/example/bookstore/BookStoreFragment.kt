@@ -99,6 +99,10 @@ class BookStoreFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
+                adapter = RecyclerAdapter(bookList, this, R.layout.card_item)
+                book_store_rv.adapter = adapter
+                book_store_rv.layoutManager = LinearLayoutManager(activity!!)
+                book_store_rv.setHasFixedSize(true)
             }, {
                 repeat(5) {
                     bookList.add(
@@ -115,11 +119,6 @@ class BookStoreFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
             })
 
         queue.add(stringRequest)
-
-        adapter = RecyclerAdapter(bookList, this, R.layout.card_item)
-        book_store_rv.adapter = adapter
-        book_store_rv.layoutManager = LinearLayoutManager(activity!!)
-        book_store_rv.setHasFixedSize(true)
     }
 
     override fun onItemClick(position: Int) {
