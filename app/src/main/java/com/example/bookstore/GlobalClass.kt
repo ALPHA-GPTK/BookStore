@@ -8,3 +8,9 @@ data class BookInfo(
     var imageUrl: String,
     var price: Int,
 )
+
+data class UserData(
+    var name: String,
+    var username: String,
+    var email: String
+)

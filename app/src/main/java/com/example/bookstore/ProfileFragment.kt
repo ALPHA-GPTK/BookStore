@@ -1,59 +1,87 @@
 package com.example.bookstore
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Editable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_profile.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class ProfileFragment : Fragment(), View.OnClickListener {
+    private lateinit var username: String
+    private lateinit var password: String
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var db: DatabaseHelper
+    private lateinit var navController: NavController
+    private lateinit var bundle: Bundle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        username = arguments!!.getString("username").toString()
+        password = arguments!!.getString("password").toString()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        db = DatabaseHelper(activity!!)
+        navController = Navigation.findNavController(view)
+
+        Log.i("username", username)
+        val (name, dbUsername, email) = db.getUserData(username, password)
+
+        inp_name.text = Editable.Factory.getInstance().newEditable(name)
+        inp_username.text = Editable.Factory.getInstance().newEditable(dbUsername)
+        inp_email.text = Editable.Factory.getInstance().newEditable(email)
+
+        view.findViewById<Button>(R.id.btn_update).setOnClickListener(this)
+        view.findViewById<Button>(R.id.btn_back).setOnClickListener(this)
+    }
+
+    override fun onClick(v: View?) {
+        bundle = bundleOf("username" to username, "password" to password)
+        when (v!!.id) {
+            R.id.btn_update -> {
+                val updatedData = db.updateUserData(
+                    inp_name.text.toString(),
+                    inp_username.text.toString(),
+                    inp_email.text.toString(),
+                    username,
+                    password
+                )
+                if (updatedData.name != "") {
+                    val (_, updatedUsername, _) = updatedData
+                    username = updatedUsername
+                    Snackbar.make(
+                        activity!!.findViewById(android.R.id.content),
+                        "user $username has been updated.",
+                        Snackbar.LENGTH_SHORT
+                    ).apply { this.setAction("Undo") { this.dismiss() }.show() }
+                } else {
+                    Snackbar.make(
+                        activity!!.findViewById(android.R.id.content),
+                        "user $username has not been updated.",
+                        Snackbar.LENGTH_SHORT
+                    )
                 }
             }
+            R.id.btn_back -> navController.navigate(
+                R.id.action_profileFragment_to_BookStoreFragment,
+                bundle
+            )
+        }
     }
 }

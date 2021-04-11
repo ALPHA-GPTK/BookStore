@@ -54,6 +54,63 @@ class DatabaseHelper(context: Context) :
     }
 
     @SuppressLint("Recycle")
+    fun getUserData(username: String, password: String): UserData {
+        val query =
+            "SELECT * FROM user WHERE user_username = '$username' AND user_password = '$password'"
+        val db: SQLiteDatabase = readableDatabase
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            UserData(
+                cursor.getString(cursor.getColumnIndex("user_name")),
+                cursor.getString(cursor.getColumnIndex("user_username")),
+                cursor.getString(cursor.getColumnIndex("user_email"))
+            )
+        } else {
+            UserData("That didn't work!", "That didn't work!", "That didn't work!")
+        }
+
+        return if (cursor.moveToFirst()) {
+            UserData(
+                cursor.getString(cursor.getColumnIndex("user_name")),
+                cursor.getString(cursor.getColumnIndex("user_username")),
+                cursor.getString(cursor.getColumnIndex("user_email"))
+            )
+        } else {
+            UserData("That didn't work!", "That didn't work!", "That didn't work!")
+        }
+//        return
+    }
+
+    fun updateUserData(
+        name: String,
+        inputUsername: String,
+        email: String,
+        username: String,
+        password: String
+    ): UserData {
+        val db: SQLiteDatabase = writableDatabase
+
+        val values = ContentValues()
+        values.put("user_name", name)
+        values.put("user_username", inputUsername)
+        values.put("user_email", email)
+
+        val updatedUser = db.update(
+            "user",
+            values,
+            "user_username = '$username' AND user_password = '$password'",
+            null
+        )
+
+        return if (updatedUser > 0) {
+            UserData(name, inputUsername, email)
+        } else {
+            UserData("", "", "")
+        }
+    }
+
+    @SuppressLint("Recycle")
     fun insertBookData(
         bookInfo: BookInfo,
         username: String,
