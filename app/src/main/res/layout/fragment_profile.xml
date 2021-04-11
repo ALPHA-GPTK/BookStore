@@ -15,7 +15,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"
+        android:contentDescription="@string/user_avatar" />
 
     <TextView
         android:id="@+id/lbl_prfname"
@@ -156,7 +157,7 @@
         app:layout_constraintTop_toBottomOf="@+id/lry_prfemail" />
 
     <Button
-        android:id="@+id/btn_cancel"
+        android:id="@+id/btn_back"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/btn_prfback"
