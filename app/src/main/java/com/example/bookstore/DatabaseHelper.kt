@@ -229,6 +229,22 @@ class DatabaseHelper(context: Context) :
         )
     }
 
+    @SuppressLint("Recycle")
+    fun checkOut(username: String, password: String): Int {
+        val db: SQLiteDatabase = writableDatabase
+        val query = "SELECT user_id FROM user where user_username = '$username' AND user_password = '$password'"
+
+        val cursor = db.rawQuery(query, null)
+        val userId =
+            if (cursor.moveToFirst()) {
+                cursor.getInt(cursor.getColumnIndex("user_id"))
+            } else {
+                0
+            }
+
+        return db.delete("book", "user_id = '$userId'", null)
+    }
+
     companion object {
         internal const val DATABASE_NAME = "BookStore"
         internal const val DATABASE_VERSION = 1

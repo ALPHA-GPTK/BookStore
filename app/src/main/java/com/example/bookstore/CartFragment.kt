@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -14,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_cart.*
 
-class CartFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
+class CartFragment : Fragment(), RecyclerAdapter.OnItemClickListener, View.OnClickListener {
     private lateinit var username: String
     private lateinit var password: String
     private lateinit var bookInfo: MutableList<BookInfo>
@@ -53,17 +54,7 @@ class CartFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
         recycler_cart_view.layoutManager = LinearLayoutManager(activity!!)
         recycler_cart_view.setHasFixedSize(true)
 
-        btn_pay.setOnClickListener {
-            Snackbar.make(it, "Checkout success", Snackbar.LENGTH_LONG).apply {
-                this.setAction("View Checkout") {
-                    navController.navigate(
-                        R.id.action_CartFragment_to_CheckoutFragment,
-                        bundle
-                    )
-                    this.dismiss()
-                }.show()
-            }
-        }
+        view.findViewById<Button>(R.id.btn_pay).setOnClickListener(this)
     }
 
     override fun onItemClick(position: Int) {
@@ -91,6 +82,30 @@ class CartFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
                 "$title not deleted",
                 Snackbar.LENGTH_LONG
             ).show()
+        }
+    }
+
+    override fun onClick(v: View?) {
+        when (v!!.id) {
+            R.id.btn_pay -> {
+                val removedCount = db.checkOut(username, password)
+                bookInfo.clear()
+                adapter.notifyItemRangeRemoved(0, removedCount)
+                txv_totalAmount.text = "0"
+                Snackbar.make(
+                    activity!!.findViewById(android.R.id.content),
+                    "Checkout success",
+                    Snackbar.LENGTH_SHORT
+                ).apply {
+                    this.setAction("View Checkout") {
+                        navController.navigate(
+                            R.id.action_CartFragment_to_CheckoutFragment,
+                            bundle
+                        )
+                        this.dismiss()
+                    }.show()
+                }
+            }
         }
     }
 }
