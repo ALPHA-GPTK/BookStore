@@ -101,7 +101,9 @@ class BookStoreFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
 
     private fun getBookData() {
         val queue = Volley.newRequestQueue(activity)
-        val url = "http://10.0.2.2/PHP_acad/FinalProject/"
+        val url =
+            "https://raw.githubusercontent.com/CWGGa/Book_API/main/book_api.json?token=ANOGHMZIP4S5GQF2DAS2UFLAPRWKE"
+
         val stringRequest = StringRequest(
             Request.Method.GET, url, { response ->
                 try {
