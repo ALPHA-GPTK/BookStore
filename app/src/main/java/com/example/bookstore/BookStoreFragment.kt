@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -48,7 +49,10 @@ class BookStoreFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
                 R.id.action_BookStoreFragment_to_CartFragment,
                 bundle
             )
-            R.id.acb_btnLogout -> navController.navigate(R.id.action_BookStoreFragment_to_LoginFragment)
+            R.id.acb_btnLogout -> {
+                fragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                navController.navigate(R.id.action_BookStoreFragment_to_LoginFragment)
+            }
             R.id.acb_profile -> navController.navigate(
                 R.id.action_BookStoreFragment_to_profileFragment,
                 bundle
