@@ -16,10 +16,13 @@
         android:id="@+id/bottom_checkout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@id/bottom_nav"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="-4dp"
+        android:layout_marginStart="-3dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="58dp"
         android:background="@color/white"
         android:padding="8dp">
 
@@ -68,5 +71,14 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="@id/bottom_checkout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu" />
 
 </RelativeLayout>

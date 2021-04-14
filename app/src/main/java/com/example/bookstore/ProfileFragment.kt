@@ -1,10 +1,8 @@
 package com.example.bookstore
 
 import android.content.Context
-import android.hardware.input.InputManager
 import android.os.Bundle
 import android.text.Editable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +12,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -29,6 +28,7 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         username = arguments!!.getString("username").toString()
         password = arguments!!.getString("password").toString()
+        bundle = bundleOf("username" to username, "password" to password)
     }
 
     override fun onCreateView(
@@ -43,7 +43,12 @@ class ProfileFragment : Fragment(), View.OnClickListener {
         db = DatabaseHelper(activity!!)
         navController = Navigation.findNavController(view)
 
-        Log.i("username", username)
+        bottom_nav.setupWithNavController(navController)
+        bottom_nav.setOnNavigationItemSelectedListener { item ->
+            navController.navigate(item.itemId, bundle)
+            true
+        }
+
         val (name, dbUsername, email) = db.getUserData(username, password)
 
         inp_name.text = Editable.Factory.getInstance().newEditable(name)
@@ -82,7 +87,11 @@ class ProfileFragment : Fragment(), View.OnClickListener {
                         Snackbar.LENGTH_SHORT
                     )
                 }
-                inputManager.hideSoftInputFromWindow(v.windowToken, 0)  //  Hide keyword when button clicked
+
+                inputManager.hideSoftInputFromWindow(
+                    v.windowToken,
+                    0
+                )  //  Hide keyword when button clicked
             }
             R.id.btn_back -> navController.navigate(
                 R.id.action_profileFragment_to_BookStoreFragment,

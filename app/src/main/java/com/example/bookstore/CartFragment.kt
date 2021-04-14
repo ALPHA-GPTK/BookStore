@@ -10,6 +10,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_cart.*
@@ -41,6 +42,12 @@ class CartFragment : Fragment(), RecyclerAdapter.OnItemClickListener, View.OnCli
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+
+        bottom_nav.setupWithNavController(navController)
+        bottom_nav.setOnNavigationItemSelectedListener { item ->
+            navController.navigate(item.itemId, bundle)
+            true
+        }
 
         db = DatabaseHelper(activity!!)
         bookList = db.getBookData(username, password)
