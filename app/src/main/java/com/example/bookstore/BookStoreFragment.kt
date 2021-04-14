@@ -7,10 +7,12 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_book_store.*
 import org.json.JSONArray
@@ -57,6 +59,7 @@ class BookStoreFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
         return super.onOptionsItemSelected(item)
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -67,7 +70,14 @@ class BookStoreFragment : Fragment(), RecyclerAdapter.OnItemClickListener {
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        navController = Navigation.findNavController(view)
+        navController = findNavController(view)
+
+        bottom_nav.setupWithNavController(navController)
+        bottom_nav.setOnNavigationItemSelectedListener { item ->
+            navController.navigate(item.itemId, bundle)
+            true
+        }
+
         getBookData()
     }
 

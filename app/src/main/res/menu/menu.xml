@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/ic_books"
+        android:id="@+id/BookStoreFragment"
         android:icon="@drawable/ic_books"
         android:title="@string/books"
         />
 
     <item
-        android:id="@+id/ic_cart"
+        android:id="@+id/CartFragment"
         android:icon="@drawable/ic_cart"
         android:title="@string/cart"
         />
 
     <item
-        android:id="@+id/ic_account"
+        android:id="@+id/profileFragment"
         android:icon="@drawable/ic_account"
         android:title="@string/account"
         />
